@@ -1,10 +1,12 @@
 //Require the dependencies
 const express = require('express')
 const morgan = require('morgan');
+const database = require('./database');
 const app = express()
 
 //Setting
 app.set("port", process.env.PORT || 8080)
+database()
 
 //Middlerwares
 app.use(morgan('dev'))
