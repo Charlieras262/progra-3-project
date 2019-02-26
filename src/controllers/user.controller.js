@@ -66,7 +66,7 @@ UserController.deleteUser = async(req, res) => {
     await User.findByIdAndDelete(req.params.id)
     res.json({
         status: true, 
-        msg:'User found'
+        msg:'User deleted'
     })
 }
 
