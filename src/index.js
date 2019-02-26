@@ -6,6 +6,8 @@ const app = express()
 
 //Setting
 app.set("port", process.env.PORT || 8080)
+
+//Database Connection
 database()
 
 //Middlerwares
@@ -13,7 +15,7 @@ app.use(morgan('dev'))
 app.use(express.json())
 
 //Routes
-
+app.use('/api/users', require('./routes/user.routes'))
 
 //Starting Server
 const server = require('http').Server(app)
