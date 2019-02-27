@@ -53,8 +53,14 @@ UserController.createUser = async (req, res) => {
  * @return {JSON} un json con un estado, un mensaje.
  */
 UserController.updateUser = async (req, res) => {
-  await User.findByIdAndUpdate(req.params.id, req.body);
-  res.json({status: true, msg: 'User updated'});
+  const user = new User(req.body);
+  const authRes = authUserInfo(user);
+  if (authRes.success) {
+    await User.findByIdAndUpdate(req.params.id, user);
+    res.json({status: true, msg: 'User updated'});
+  } else {
+    res.json(authRes);
+  }
 };
 
 /**
