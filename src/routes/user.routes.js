@@ -1,9 +1,22 @@
-const express = require('express')
-const router = express.Router()
+const express = require('express');
+const router = express.Router();
+const passport = require('passport');
 const controller = require('../controllers/user.controller');
 
-//Peticionnes http al servidor
-router.get('/', controller.getUser)
+/* Peticionnes http al servidor */
 
-// Se exporta el rauter para poder utilizar sus rutas e indexar 
-module.exports = router
+// Obtener Usuarios
+router.get('/', passport.authenticate('jwt', {session:false}), controller.getUsers);
+// Obtener Usuario por id
+router.get('/:id', controller.getUser);
+// Crear Usuario
+router.post('/register', controller.createUser);
+//Iniciar sesion de usuario
+router.post('/login', controller.authUserInfo);
+// Actualizar Usuario
+router.put('/:id', controller.updateUser);
+// Eliminar Usuario
+router.delete('/:id', controller.deleteUser);
+
+// Se exporta el rauter para poder utilizar sus rutas e indexar
+module.exports = router;

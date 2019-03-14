@@ -1,4 +1,4 @@
 module.exports = {
-    database: 'mongodb://localhost:27017/mern',
-    secret: '1234'
+    database: 'mongodb+srv://charlie:1234@cluster0-llaan.mongodb.net/mern?retryWrites=true',
+    secret: 'mgmY14dYnV4c!'
   }
