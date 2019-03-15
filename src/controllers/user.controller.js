@@ -115,6 +115,12 @@ UserController.authUserInfo = (req, res) => {
     email: req.body.email,
     password: req.body.password
   }
+  var emailR = Validations.isFilled(userModel.email, "Email");
+  var passR = Validations.isFilled(userModel.password, "Password");
+  if(!emailR.success) return res.json(emailR);
+  emailR = valEmail(userModel.email);
+  if(!emailR.success) return res.json(emailR);
+  if(!passR.success) return res.json(passR);
   User.getUserByEmail(userModel.email, (err, user) => {
     if(err) throw err;
     if(!user){
@@ -126,7 +132,6 @@ UserController.authUserInfo = (req, res) => {
       var userJSON = JSON.parse(JSON.stringify(user));
       var salt = userJSON.salt
       var hashedUserPassword = Validations.checkHashPassword(userModel.password, salt).passwordHash;
-      console.log(hashedUserPassword +", "+ userJSON.password);
       if(hashedUserPassword === userJSON.password){
         const token = jwt.sign(user.toJSON(), config.secret, {
           expiresIn: 604800 // 1 week
