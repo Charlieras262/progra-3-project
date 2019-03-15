@@ -117,16 +117,17 @@ UserController.authUserInfo = (req, res) => {
   }
   var emailR = Validations.isFilled(userModel.email, "Email");
   var passR = Validations.isFilled(userModel.password, "Password");
-  if(!emailR.success) return res.json(emailR);
+  if(!emailR.success) return res.json({emailR, node: 0});
   emailR = valEmail(userModel.email);
-  if(!emailR.success) return res.json(emailR);
-  if(!passR.success) return res.json(passR);
+  if(!emailR.success) return res.json({emailR, node: 0});
+  if(!passR.success) return res.json({passR, node: 1});
   User.getUserByEmail(userModel.email, (err, user) => {
     if(err) throw err;
     if(!user){
       res.json({
         success: false,
-        msg: 'User not found!!, Please check the email'
+        msg: 'User not found!!, Please check the email',
+        node: 0
       });
     }else{
       var userJSON = JSON.parse(JSON.stringify(user));
@@ -151,7 +152,8 @@ UserController.authUserInfo = (req, res) => {
       }else{
         res.json({
           success: false,
-          msg: 'Wrong Password!!!'
+          msg: 'Wrong Password!!!',
+          node: 1
         });
       }
     }
