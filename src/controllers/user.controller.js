@@ -14,8 +14,8 @@ const jwt = require('jsonwebtoken');
  */
 UserController.getUsers = async (req, res) => {
   const user = await User.find();
-  if (user.length === 0) res.json({status: false, msg: 'Users not found'});
-  else res.json({status: true, msg: 'Users found', user});
+  if (user.length === 0) res.json({success: false, msg: 'Users not found'});
+  else res.json({success: true, msg: 'Users found', user});
 };
 
 /**
@@ -27,8 +27,8 @@ UserController.getUsers = async (req, res) => {
 UserController.getUser = async (req, res) => {
   const id = req.params.id;
   const user = await User.findById(id);
-  if (!user) res.json({status: false, msg: 'User not found'});
-  else res.json({status: true, msg: 'User found', user});
+  if (!user) res.json({success: false, msg: 'User not found'});
+  else res.json({success: true, msg: 'User found', user});
 };
 
 
@@ -59,7 +59,7 @@ UserController.createUser = async (req, res) => {
         res.json({success: false, msg: 'The email is already used.'});
       }else{
         user.save();
-        res.json({status: true, msg: 'User created'});
+        res.json({success: true, msg: 'User created'});
       }
     });
   } else {
@@ -78,7 +78,7 @@ UserController.updateUser = async (req, res) => {
   const authRes = authUserInfo(user);
   if (authRes.success) {
     await User.findByIdAndUpdate(req.params.id, user);
-    res.json({status: true, msg: 'User updated'});
+    res.json({success: true, msg: 'User updated'});
   } else {
     res.json(authRes);
   }
@@ -92,7 +92,7 @@ UserController.updateUser = async (req, res) => {
  */
 UserController.deleteUser = async (req, res) => {
   await User.findByIdAndDelete(req.params.id);
-  res.json({status: true, msg: 'User deleted'});
+  res.json({success: true, msg: 'User deleted'});
 };
 
 var valEmail = (email) => {
