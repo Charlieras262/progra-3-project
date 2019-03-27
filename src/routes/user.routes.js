@@ -6,7 +6,7 @@ const controller = require('../controllers/user.controller');
 /* Peticionnes http al servidor */
 
 // Obtener Usuarios
-router.get('/', passport.authenticate('jwt', {session:false}), controller.getUsers);
+router.get('/:id/profile', passport.authenticate('jwt', {session:false}), controller.getProfile);
 // Obtener Usuario por id
 router.get('/:id', controller.getUser);
 // Crear Usuario
