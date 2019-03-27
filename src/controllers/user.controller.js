@@ -6,13 +6,13 @@ const config = require('../config/database');
 const jwt = require('jsonwebtoken');
 
 /**
- * Este metodo obtiene todos los usuarios de la base de datos
+ * Este metodo obtiene la informacion del perfil de un usuario
  * @param {*} req es el requerimiento que envia el front end al servidor.
  * @param {*} res es la respuesta que envia el servidor al front end.
  * @return {JSON} un json con un estado, un mensaje
- * y un arreglo de usuarios si existen.
+ * y un usuario.
  */
-UserController.getUsers = async (req, res) => {
+UserController.getProfile = async (req, res) => {
   const user = await User.find();
   if (user.length === 0) res.json({success: false, msg: 'Users not found'});
   else res.json({success: true, msg: 'Users found', user});
@@ -54,7 +54,7 @@ UserController.createUser = async (req, res) => {
   const user = new User(userModel)
   const authRes = authUserInfo(user);
   if (authRes.success) {
-    User.findOne({email: userModel.email}).count((err, number) => {
+    User.findOne({email: userModel.email}).countDocuments((err, number) => {
       if (number !== 0) {
         res.json({success: false, msg: 'The email is already used.'});
       }else{
@@ -141,10 +141,8 @@ UserController.authUserInfo = (req, res) => {
           msg: 'Login success',
           token: 'JWT ' + token,
           user: {
-            name: userJSON.name, 
-            lastname: userJSON.lastname, 
             username: userJSON.username, 
-            email: userJSON.email, 
+            email: userJSON.email,
             type: userJSON.type
           }
         });
