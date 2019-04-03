@@ -8,7 +8,8 @@ const TeacherSchema = new Schema({
     fnac: {type: String, required: true},
     cui: {type: String, required: true},
     esp: {type: String, required: true},
-    asings: {type: Number, required: false}
+    asings: {type: Number, required: false},
+    alert: {type: Schema.ObjectId, ref: 'Alert',required: false}
 });
 
 const Teacher = module.exports = mongoose.model('Teacher', TeacherSchema);

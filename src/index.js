@@ -29,6 +29,7 @@ app.use('/api/pensums', require('./routes/pensum.routes'));
 app.use('/api/unities', require('./routes/unity.routes'));
 app.use('/api/subjects', require('./routes/subject.routes'));
 app.use('/api/teachers', require('./routes/teacher.routes'));
+app.use('/api/scores', require('./routes/score.routes'))
 
 //Starting Server
 const server = require('http').Server(app)

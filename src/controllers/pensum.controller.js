@@ -41,10 +41,7 @@ PensumController.createPensum = async (req, res) => {
 
 
 PensumController.updatePensum = async (req, res) => {
-    const pensum = {
-        name: req.body.name,
-        unities: req.body.unities
-    }
+    const pensum = new Pensum(req.body);
     await Pensum.findByIdAndUpdate(req.params.id, pensum);
     res.json({
         status: 'Pensum Updated'

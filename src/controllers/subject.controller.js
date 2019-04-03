@@ -27,10 +27,7 @@ SubjectController.createSubject = async (req, res) => {
 
 
 SubjectController.updateSubject = async (req, res) => {
-    const subject = {
-        name: req.body.name,
-        content_help: req.body.content_help
-    }
+    const subject = new Subject(req.body);
     await Subject.findByIdAndUpdate(req.params.id, subject);
     res.json({
         status: 'Subject Updated'

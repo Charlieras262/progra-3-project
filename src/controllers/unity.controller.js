@@ -27,10 +27,7 @@ UnityController.createUnity = async (req, res) => {
 
 
 UnityController.updateUnity = async (req, res) => {
-    const unity = {
-        number: req.body.number,
-        subjects: req.body.subjects
-    }
+    const unity = new Unity(req.body);
     await Unity.findByIdAndUpdate(req.params.id, unity);
     res.json({
         status: 'Unity Updated'

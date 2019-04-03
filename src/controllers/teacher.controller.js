@@ -29,13 +29,7 @@ TeacherController.createTeacher = async (req, res) => {
 
 
 TeacherController.updateTeacher = async (req, res) => {
-  const teacher = {
-       name: req.body.name,
-       cod_teacher: req.body.cod_teacher,
-       cycle: req.body.cycle,
-       section: req.body.section,
-       cod_teacher: req.body.cod_teacher
-  }
+  const teacher = new Teacher(req.body);
   await Teacher.findByIdAndUpdate(req.params.id, teacher);
   res.json({
     status: 'Teacher Updated'
