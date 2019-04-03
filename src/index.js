@@ -28,10 +28,10 @@ app.use('/api/courses', require('./routes/course.routes'));
 app.use('/api/pensums', require('./routes/pensum.routes'));
 app.use('/api/unities', require('./routes/unity.routes'));
 app.use('/api/subjects', require('./routes/subject.routes'));
+app.use('/api/teachers', require('./routes/teacher.routes'));
 
 //Starting Server
 const server = require('http').Server(app)
 server.listen(app.get('port'), () => {
     console.log(`Server is listening on port ${app.get('port')}`)
 })
-
