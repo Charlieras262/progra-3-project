@@ -1,0 +1,146 @@
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:300);
+.contenedor {
+    font-family: "Roboto", sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.contenedor h1 {
+    text-align: center;
+    font-size: 68px;
+}
+
+.contenedor .contenedor-botones {
+    display: flex;
+    width: 500px;
+}
+
+.contenedor .contenedor-botones button {
+    outline: none;
+    margin: 10px;
+    width: 100%;
+    padding: 20px 10px;
+    border: 0px;
+    background: #ffee6d;
+    border-radius: 30px;
+    font-size: 14px;
+}
+
+.contenedor .contenedor-botones button.active {
+    background: #fa6617;
+}
+
+.hero-area {
+    position: relative;
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+#home.hero-area {
+    height: calc(100vh - 80px);
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.home-wrapper {
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    left: 0;
+    right: 0;
+}
+
+
+/* -- Breadcrumb -- */
+
+.hero-area-tree li {
+    display: inline-block;
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: #CB3234;
+}
+
+.hero-area-tree li>a {
+    color: #CB3234;
+}
+
+.hero-area-tree li+li:before {
+    content: "/";
+    display: inline-block;
+    margin: 0px 5px;
+    color: #CB3234;
+}
+
+
+/* --- Buttons --- */
+
+.main-button {
+    position: relative;
+    display: inline-block;
+    padding: 10px 30px;
+    background-color: #CB3234;
+    border: 2px solid transparent;
+    border-radius: 40px;
+    color: #FFF;
+    -webkit-transition: 0.2s all;
+    transition: 0.2s all;
+}
+
+.main-button:hover,
+.main-button:focus {
+    background-color: #fff;
+    border: 2px solid #CB3234;
+    color: #CB3234;
+}
+
+.main-button.icon-button:hover,
+.main-button.icon-button:focus {
+    padding-right: 45px;
+}
+
+.main-button.icon-button:after {
+    content: "\f178";
+    font-family: FontAwesome;
+    position: absolute;
+    width: 30px;
+    right: 15px;
+    text-align: center;
+    opacity: 0;
+    -webkit-transition: 0.2s all;
+    transition: 0.2s all;
+}
+
+.main-button.icon-button:hover:after,
+.main-button.icon-button:focus:after {
+    opacity: 1;
+}
+
+svg {
+    width: 100%;
+    position: absolute;
+    top: -100px;
+    right: 310px;
+    transform: scale(0.5);
+}
+
+svg path {
+    stroke-dasharray: 100%;
+    stroke-dashoffset: 0;
+    stroke: #cb3234;
+    animation: dash 1s ease-in;
+}
+
+@keyframes dash {
+    from {
+        stroke-dashoffset: 100%;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
