@@ -9,15 +9,18 @@ import { TranslateService } from '@ngx-translate/core';
 export class NavbarComponent implements OnInit {
 
   constructor(public translateService: TranslateService) {
-    this.translateService.setDefaultLang('es');
+    this.translateService.setDefaultLang('en');
    }
 
   ngOnInit() {
   }
 
+  getDashboardRoute(){
+    return '/dashboard/100'
+  }
+
   onLogoutClick(){
-    this.translateService.use('en')
-    console.log(this.translateService.get('home').subscribe());
+    this.translateService.use('es')
   }
 
 }

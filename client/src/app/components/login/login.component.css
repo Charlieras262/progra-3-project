@@ -44,6 +44,10 @@
     max-width: 100%;
 }
 
+.brand {
+    font-family: Poppins-Bold;
+}
+
 
 /*------------------------------------------------------------------
   [  ]*/
@@ -66,7 +70,7 @@
     font-family: Poppins-Medium;
     font-size: 15px;
     line-height: 1.5;
-    color: #666666;
+    color: #aaaaaa;
     display: block;
     width: 100%;
     background: #131317;

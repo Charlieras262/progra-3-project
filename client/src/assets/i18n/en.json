@@ -1,4 +1,5 @@
 {
+    "appname": "Brainsco",
     "home": "Home",
     "dashboard": "Dashboard",
     "login": "Login",
@@ -6,5 +7,11 @@
     "login_user_title": "Login User",
     "email": "Email",
     "pass": "Password",
-    "aint_reg": "I don't have an account yet."
+    "aint_reg": "I don't have an account yet.",
+    "language": "Language",
+    "welcome": "Welcome",
+    "es": "Spanish",
+    "en": "English",
+    "home_title": "Brainsco, Free Online Educational Platform",
+    "home_p": "You can control the students' academic performance, take tests, assign homework and more."
 }

@@ -9,10 +9,10 @@ import { SingupComponent } from './components/singup/singup.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'home', redirectTo: ''},
+  {path: 'home', redirectTo: ''},                                                                               
   {path: 'dashboard/001', component: DashboardAdminComponent},
   {path: 'dashboard/010', component: DashboardProfComponent},
-  {path: 'dashboard/101', component: DashboardEstComponent},
+  {path: 'dashboard/100', component: DashboardEstComponent},
   {path: 'login', component: LoginComponent},
   {path: 'singup', component: SingupComponent}
 ];
