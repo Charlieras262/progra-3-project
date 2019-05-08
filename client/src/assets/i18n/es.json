@@ -1,0 +1,10 @@
+{
+    "home": "Inicio",
+    "dashboard": "Dashboard",
+    "login": "Iniciar Sesión",
+    "singup": "Registrarse",
+    "login_user_title": "Inicio de Sesión",
+    "email": "Correo Electrónico",
+    "pass": "Contraseña",
+    "aint_reg": "No tengo una cuenta aún."
+}

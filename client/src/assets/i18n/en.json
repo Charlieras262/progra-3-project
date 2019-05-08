@@ -1,0 +1,10 @@
+{
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "login": "Login",
+    "singup": "Register",
+    "login_user_title": "Login User",
+    "email": "Email",
+    "pass": "Password",
+    "aint_reg": "I don't have an account yet."
+}
