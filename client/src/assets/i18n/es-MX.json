@@ -1,0 +1,17 @@
+{
+    "appname": "Brainsco",
+    "home": "Inicio",
+    "dashboard": "Dashboard",
+    "login": "Iniciar Sesión",
+    "singup": "Registrarse",
+    "login_user_title": "Inicio de Sesión",
+    "email": "Correo Electrónico",
+    "pass": "Contraseña",
+    "aint_reg": "No tengo una cuenta aún.",
+    "language": "Idioma",
+    "welcome": "Bienvenido",
+    "es": "Español",
+    "en": "Inglés",
+    "home_title": "Brainsco, Plataforma Educativa Online Gratis",
+    "home_p": "Puedes llevar el control del desempeño academico de los estudiantes, hacer examenes, dar tareas y más."
+}

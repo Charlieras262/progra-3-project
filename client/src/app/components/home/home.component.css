@@ -144,3 +144,23 @@ svg path {
         stroke-dashoffset: 0;
     }
 }
+
+@media (max-width: 1220px) {
+    svg {
+        top: -150px;
+        right: 310px;
+    }
+}
+
+@media (max-width: 1024px) {
+    svg {
+        top: -150px;
+        right: 260px;
+    }
+}
+
+@media (max-width: 991px) {
+    svg {
+        display: none;
+    }
+}

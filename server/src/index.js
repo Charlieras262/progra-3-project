@@ -4,8 +4,8 @@ const morgan = require('morgan');
 const database = require('./database');
 const passport = require('passport');
 const methodOverride = require('method-override');
-const app = express()
-require('./models/Pensum');
+const app = express();
+require('./config/verify').createAdminUser();
 
 //Setting
 app.set("port", process.env.PORT || 8080)
@@ -31,8 +31,13 @@ app.use('/api/subjects', require('./routes/subject.routes'));
 app.use('/api/teachers', require('./routes/teacher.routes'));
 app.use('/api/scores', require('./routes/score.routes'))
 
-//Starting Server
-const server = require('http').Server(app)
+// Starting Server
+var server = require('http').Server(app);
+const io = require('socket.io')(server);
 server.listen(app.get('port'), () => {
-    console.log(`Server is listening on port ${app.get('port')}`)
-})
+    console.log(`Express server listening on port ${app.get('port')}`);
+});
+
+require('./websocket/socket.io')(io);
+
+module.exports = app;
