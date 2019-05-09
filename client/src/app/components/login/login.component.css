@@ -76,8 +76,11 @@
     background: #131317;
     height: 50px;
     border-radius: 25px;
-    padding: 0 30px 0 68px;
+    padding: 0px 68px 0px 68px;
 }
+
+
+/*T R B L */
 
 
 /*------------------------------------------------------------------
@@ -138,9 +141,96 @@
     transition: all 0.4s;
 }
 
+.input-invalid {
+    font-size: 15px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    border-radius: 25px;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    padding-right: 0px;
+    pointer-events: none;
+    color: #0000;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+}
+
+.input-valid {
+    font-size: 15px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    border-radius: 25px;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    padding-right: 0px;
+    pointer-events: none;
+    color: #0000;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+}
+
+.invalid .shake {
+    animation: tiembla 0.5s;
+    -webkit-animation: tiembla 0.5s;
+}
+
+.valid .input-valid {
+    padding-right: 35px;
+    color: #4BBF73;
+}
+
+.invalid .input-invalid {
+    padding-right: 35px;
+    color: #cb3234;
+}
+
+.valid .input-invalid {
+    color: #0000;
+}
+
+.invalid .input-valid {
+    color: #0000;
+}
+
 .input:focus+.focus-input+.symbol-input {
     color: #cb3234;
     padding-left: 28px;
+}
+
+.input:focus~.input-invalid {
+    padding-right: 28px;
+}
+
+.input:focus~.input-valid {
+    padding-right: 28px;
+}
+
+@keyframes tiembla {
+    0% {
+        -webkit-transform: rotateZ(-5deg);
+    }
+    50% {
+        -webkit-transform: rotateZ( 0deg) scale(.8);
+    }
+    100% {
+        -webkit-transform: rotateZ( 5deg);
+    }
 }
 
 

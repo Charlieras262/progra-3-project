@@ -42,7 +42,6 @@ UserController.getUser = async(req, res) => {
 UserController.createUser = async(req, res) => {
 
     var hash = bcrypt.hashSync(req.body.password, 10);
-
     const userModel = {
         name: req.body.name,
         lastname: req.body.lastname,

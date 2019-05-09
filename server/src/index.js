@@ -4,6 +4,8 @@ const morgan = require('morgan');
 const database = require('./database');
 const passport = require('passport');
 const methodOverride = require('method-override');
+const cors = require('cors');
+
 const app = express();
 require('./config/verify').createAdminUser();
 
@@ -19,6 +21,7 @@ app.use(express.json())
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride('_method'));
+app.use(cors({ origin: 'http://localhost:4200' }));
 
 require('./controllers/validations/passport')(passport);
 

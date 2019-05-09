@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthenticateService } from 'src/app/services/authenticate/authenticate.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,7 +9,8 @@ import { TranslateService } from '@ngx-translate/core';
 })
 
 export class NavbarComponent implements OnInit {
-  constructor(public translateService: TranslateService) {
+  constructor(public translateService: TranslateService,
+    public authService: AuthenticateService) {
     const lang = window.navigator.language || navigator.language;
     this.translateService.setDefaultLang(lang);
   }
@@ -22,6 +24,7 @@ export class NavbarComponent implements OnInit {
   }
 
   onLogoutClick() {
+    this.authService.logout();
 
   }
 }

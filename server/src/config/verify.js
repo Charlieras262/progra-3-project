@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const bcrypt = require('bcryptjs');
 const genVal = require('../controllers/validations/general.validation');
 
 module.exports.createAdminUser = () => {
@@ -8,7 +9,9 @@ module.exports.createAdminUser = () => {
         if (!user) {
             console.log('Admin User has not created');
             console.log('Creating...');
-            new User(JSON.parse(genVal.decrypt(userData))).save()
+            var user = JSON.parse(genVal.decrypt(userData))
+            user.password = bcrypt.hashSync(JSON.parse(genVal.decrypt(userData)).password, 10)
+            new User(user).save()
         } else {
             console.log('Admin User has already Created');
         }
