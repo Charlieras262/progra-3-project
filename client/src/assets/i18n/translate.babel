@@ -847,7 +847,7 @@
             <copy_template>_('%1')</copy_template>
         </copy_templates>
     </editor_configuration>
-    <primary_language>en-US</primary_language>
+    <primary_language>es-GT</primary_language>
     <configuration>
         <indent>tab</indent>
         <format>json</format>
