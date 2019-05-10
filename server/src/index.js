@@ -32,7 +32,10 @@ app.use('/api/pensums', require('./routes/pensum.routes'));
 app.use('/api/unities', require('./routes/unity.routes'));
 app.use('/api/subjects', require('./routes/subject.routes'));
 app.use('/api/teachers', require('./routes/teacher.routes'));
-app.use('/api/scores', require('./routes/score.routes'))
+app.use('/api/scores', require('./routes/score.routes'));
+app.use('/api/institutions', require('./routes/institution.routes'));
+app.use('/api/asignations', require('./routes/asignations.routes'));
+app.use('/api/students', require('./routes/students.routes'));
 
 // Starting Server
 var server = require('http').Server(app);

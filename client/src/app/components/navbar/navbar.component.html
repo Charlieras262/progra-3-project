@@ -10,10 +10,10 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
-                <a class="nav-link" [routerLink]="['']" routerLinkActive="router-link-active">{{ 'home' | translate }} </a>
+                <a class="nav-link" [routerLink]="['']" routerLinkActive="router-link-active"><i class="fa fa-home" aria-hidden="true"></i> {{ 'home' | translate }} </a>
             </li>
-            <li *ngIf="authService.loggedIn()" class="nav-item">
-                <a class="nav-link" [routerLink]="[getDashboardRoute()]" routerLinkActive="router-link-active">{{ 'dashboard' | translate }}</a>
+            <li *ngIf="authService.loggedIn()" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" [routerLink]="[getDashboardRoute()]" routerLinkActive="router-link-active"><i class="fa fa-calendar-minus-o" aria-hidden="true"></i> {{ 'dashboard' | translate }}</a>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
@@ -26,14 +26,14 @@
             <li *ngIf="authService.loggedIn()" class="nav-item dropdown show">
                 <div class="btn-group">
                     <a id="username" href="#" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        username
+                        <i class="fa fa-user" aria-hidden="true"></i> {{username}}
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
-                        <a class="dropdown-item" href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-                        <a class="dropdown-item" href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                        <a class="dropdown-item" [routerLink]="['/profile']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}"><i class="fa fa-fw fa-user"></i> {{'profile' | translate}}</a>
+                        <a class="dropdown-item" [routerLink]="['/inbox']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}"><i class="fa fa-fw fa-envelope"></i> {{'inbox' | translate}}</a>
+                        <a class="dropdown-item" [routerLink]="['setting']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}"><i class="fa fa-fw fa-gear"></i> {{'conf' | translate}}</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item btn-link" [routerLink]="['/home']" routerLinkActive="router-link-active" routerLinkActive="router-link-active" (click)="onLogoutClick()"><i class="fa fa-fw fa-power-off"></i> logout</a>
+                        <a class="dropdown-item btn-link" [routerLink]="['/home']" routerLinkActive="router-link-active" routerLinkActive="router-link-active" (click)="onLogoutClick()"><i class="fa fa-fw fa-power-off"></i> {{'logout' | translate}}</a>
                     </div>
                 </div>
             </li>

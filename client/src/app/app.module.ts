@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     DashboardAdminComponent,
     DashboardEstComponent,
     LoginComponent,
-    SingupComponent
+    SingupComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

@@ -6,15 +6,22 @@ import { DashboardEstComponent } from './components/dashboard-est/dashboard-est.
 import { DashboardProfComponent } from './components/dashboard-prof/dashboard-prof.component';
 import { LoginComponent } from './components/login/login.component';
 import { SingupComponent } from './components/singup/singup.component';
+import { UserAdminGuard } from './guards/admin/user-admin.guard';
+import { NoLoginGuard } from './guards/no-login/no-login.guard';
+import { UserStudentGuard } from './guards/student/user-student.guard';
+import { UserTeacherGuard } from './guards/teacher/user-teacher.guard';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'home', redirectTo: ''},                                                                               
-  {path: 'dashboard/001', component: DashboardAdminComponent},
-  {path: 'dashboard/010', component: DashboardProfComponent},
-  {path: 'dashboard/100', component: DashboardEstComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'singup', component: SingupComponent}
+  {path: 'dashboard/001', component: DashboardAdminComponent, canActivate: [UserAdminGuard]},
+  {path: 'dashboard/010', component: DashboardProfComponent, canActivate: [UserTeacherGuard]},
+  {path: 'dashboard/100', component: DashboardEstComponent, canActivate: [UserStudentGuard]},
+  {path: 'login', component: LoginComponent, canActivate: [NoLoginGuard]},
+  {path: 'singup', component: SingupComponent, canActivate: [NoLoginGuard]},
+  {path: '**', redirectTo: 'not-found'},
+  {path: 'not-found', component: NotFoundComponent}
 ];
 
 @NgModule({
