@@ -121,18 +121,23 @@
     opacity: 1;
 }
 
+.svgContainer{
+    position: relative;
+    display: flex;
+    width: 100%;
+}
+
 svg {
     width: 100%;
     position: absolute;
-    top: -100px;
-    right: 310px;
-    transform: scale(0.5);
+    top: 0;
+    left: 0;
 }
 
 svg path {
     stroke-dasharray: 100%;
     stroke-dashoffset: 0;
-    stroke: #cb3234;
+    stroke: #0B0B10;
     animation: dash 1s ease-in;
 }
 
@@ -142,25 +147,5 @@ svg path {
     }
     to {
         stroke-dashoffset: 0;
-    }
-}
-
-@media (max-width: 1220px) {
-    svg {
-        top: -150px;
-        right: 310px;
-    }
-}
-
-@media (max-width: 1024px) {
-    svg {
-        top: -150px;
-        right: 260px;
-    }
-}
-
-@media (max-width: 991px) {
-    svg {
-        display: none;
     }
 }
