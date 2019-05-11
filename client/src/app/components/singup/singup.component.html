@@ -1,3 +1,32 @@
-<p>
-  singup works!
-</p>
+<div class="container">
+  <div class="row">
+      <div class="col-md-6 mt-5 mx-auto">
+          <form (submit)="register()">
+            <h2 class="text-info mb-5 text-center brand">Registrarse</h2>
+              <div class="form-group">
+                  <label for="first_name">Primer Nombre</label>
+                  <input type="text" class="form-control" name="first_name" placeholder="Ingrese un Nombre"
+                      [(ngModel)]="credentials.first_name">
+              </div>
+              <div class="form-group">
+                  <label for="last_name">Apellido </label>
+                  <input type="text" class="form-control" name="last_name" placeholder="Ingrese un Apellido" [(ngModel)]="credentials.last_name">
+              </div>
+              <div class="form-group">
+                  <label for="email">Correo Electronico</label>
+                  <input type="email" class="form-control" name="email" placeholder="Ingresar Email" [(ngModel)]="credentials.email">
+              </div>
+              <div class="form-group">
+                  <label for="password">Contraseña </label>
+                  <input type="password" class="form-control" name="password" placeholder="Ingresar Password"
+                      [(ngModel)]="credentials.password">
+              </div>
+              <div class="form-group">
+                <label for="last_name">Codigo De Validacion </label>
+                <input type="text" class="form-control" name="last_name" placeholder="Ingrese un Nombre" [(ngModel)]="credentials.last_name">
+            </div>
+              <button class="btn btn-info col-md-12 mt-4" type="submit">Registrarse</button>
+          </form>
+      </div>
+  </div>
+</div>
