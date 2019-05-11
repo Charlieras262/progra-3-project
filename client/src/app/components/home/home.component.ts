@@ -31,11 +31,13 @@ export class HomeComponent implements OnInit {
       const user = JSON.parse(localStorage.getItem('user'));
       switch (user.type) {
         case 'S':
-        return '/dashboard/001';            
+        return '/dashboard/0001';
+        case 'A':
+        return '/dashboard/0010';            
         case 'P':
-        return '/dashboard/010';
+        return '/dashboard/0100';
         case 'E':
-        return '/dashboard/100';
+        return '/dashboard/1000';
         default:
           return '/home'
       }

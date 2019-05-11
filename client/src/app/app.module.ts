@@ -17,6 +17,12 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { DashboardSuComponent } from './components/dashboard-su/dashboard-su.component';
+import { InstitutionsComponent } from './components/institutions/institutions.component';
+import { StudentsComponent } from './components/students/students.component';
+import { TeachersComponent } from './components/teachers/teachers.component';
+import { CoursesComponent } from './components/courses/courses.component';
+import { AssignmentsComponent } from './components/assignments/assignments.component';
+import { ReportsComponent } from './components/reports/reports.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +35,13 @@ import { DashboardSuComponent } from './components/dashboard-su/dashboard-su.com
     LoginComponent,
     SingupComponent,
     NotFoundComponent,
-    DashboardSuComponent
+    DashboardSuComponent,
+    InstitutionsComponent,
+    StudentsComponent,
+    TeachersComponent,
+    CoursesComponent,
+    AssignmentsComponent,
+    ReportsComponent
   ],
   imports: [
     BrowserModule,
