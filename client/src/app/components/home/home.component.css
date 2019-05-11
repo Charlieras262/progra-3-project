@@ -105,7 +105,7 @@
 }
 
 .main-button.icon-button:after {
-    content: "\f178";
+    content: "\f090";
     font-family: FontAwesome;
     position: absolute;
     width: 30px;
@@ -121,7 +121,7 @@
     opacity: 1;
 }
 
-.svgContainer{
+.svgContainer {
     position: relative;
     display: flex;
     width: 100%;

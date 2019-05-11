@@ -11,13 +11,16 @@ import { NoLoginGuard } from './guards/no-login/no-login.guard';
 import { UserStudentGuard } from './guards/student/user-student.guard';
 import { UserTeacherGuard } from './guards/teacher/user-teacher.guard';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { DashboardSuComponent } from './components/dashboard-su/dashboard-su.component';
+import { SuGuard } from './guards/su/su.guard';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'home', redirectTo: ''},                                                                               
-  {path: 'dashboard/001', component: DashboardAdminComponent, canActivate: [UserAdminGuard]},
-  {path: 'dashboard/010', component: DashboardProfComponent, canActivate: [UserTeacherGuard]},
-  {path: 'dashboard/100', component: DashboardEstComponent, canActivate: [UserStudentGuard]},
+  {path: 'home', redirectTo: ''},                                                     
+  {path: 'dashboard/0001', component: DashboardSuComponent, canActivate: [SuGuard]},                          
+  {path: 'dashboard/0010', component: DashboardAdminComponent, canActivate: [UserAdminGuard]},
+  {path: 'dashboard/0100', component: DashboardProfComponent, canActivate: [UserTeacherGuard]},
+  {path: 'dashboard/1000', component: DashboardEstComponent, canActivate: [UserStudentGuard]},
   {path: 'login', component: LoginComponent, canActivate: [NoLoginGuard]},
   {path: 'singup', component: SingupComponent, canActivate: [NoLoginGuard]},
   {path: '**', redirectTo: 'not-found'},

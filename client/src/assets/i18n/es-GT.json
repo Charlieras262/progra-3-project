@@ -2,7 +2,6 @@
 	"404.back_msg": "¡Regresar a la página principal!",
 	"404.sub_title": "La página que estás buscando no existe.",
 	"404.title": "Página no encontrada",
-	"admin_guard_msg": "Es necesario que inicie sesión como Administrador.",
 	"aint_reg": "No tengo una cuenta aún.",
 	"appname": "Brainsco",
 	"conf": "Configuraciones",
@@ -17,13 +16,12 @@
 	"inbox": "Bandeja de entrada",
 	"language": "Idioma",
 	"login": "Iniciar Sesión",
-	"login_guard_msg": "Es necesario que inicie sesión.",
+	"login_guard_msg": "Primero debes iniciar sesión.",
 	"login_user_title": "Inicio de Sesión",
 	"logout": "Cerrar Sesión",
 	"pass": "Contraseña",
 	"profile": "Perfil",
 	"singup": "Registrarse",
-	"student_guard_msg": "Es necesario que inicie sesión como Estudiante.",
-	"teacher_guard_msg": "Es necesario que inicie sesión como Profesor.",
+	"su_guard_msg": "No tienes los permisos necesarios.",
 	"welcome": "Bienvenido"
 }

@@ -16,6 +16,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { DashboardSuComponent } from './components/dashboard-su/dashboard-su.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     DashboardEstComponent,
     LoginComponent,
     SingupComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    DashboardSuComponent
   ],
   imports: [
     BrowserModule,

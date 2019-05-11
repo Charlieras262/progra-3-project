@@ -16,30 +16,36 @@ export class UserTeacherGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-      if (localStorage.getItem('user') === null) {
-        this.router.navigate(['/login']);
-        this.translate.get('teacher_guard_msg').subscribe(res => {
+    if (localStorage.getItem('user') === null) {
+      this.router.navigate(['/login']);
+      this.translate.get('login_guard_msg').subscribe(res => {
+        $.toaster(res, '<i class="fa fa-exclamation-triangle"></i>', 'info');
+      });
+      return false;
+    } else {
+      var user = JSON.parse(localStorage.getItem('user'));
+      if (user.type === 'P') {
+        return true;
+      } else {
+        switch (user.type) {
+          case 'A':
+            this.router.navigate(['/dashboard/0010']);
+            break;
+          case 'E':
+            this.router.navigate(['/dashboard/1000']);
+            break;
+          case 'S':
+            this.router.navigate(['/dashboard/0001']);
+            break;
+          default:
+            this.router.navigate(['/home']);
+            break;
+        }
+        this.translate.get('su_guard_msg').subscribe(res => {
           $.toaster(res, '<i class="fa fa-exclamation-triangle"></i>', 'info');
         });
         return false;
-      } else {
-        var user = JSON.parse(localStorage.getItem('user'));
-        if (user.type == 'T') {
-          return true;
-        } else {
-          switch(user.type){
-            case 'A':
-            this.router.navigate(['/dashboard']);
-            break;
-            case 'S':
-            this.router.navigate(['/coursesasigned']);
-            break;
-            default:
-            this.router.navigate(['/profile']);
-            break;
-          }
-          return false;
-        }
       }
+    }
   }
 }

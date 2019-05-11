@@ -125,7 +125,8 @@ UserController.authUserInfo = (req, res) => {
         if (!user) {
             res.json({
                 success: false,
-                msg: 'User not found!!, Please check the email'
+                msg: 'User not found!!, Please check the email',
+                node: 'email'
             });
         } else {
             var userJSON = JSON.parse(JSON.stringify(user));
@@ -148,7 +149,8 @@ UserController.authUserInfo = (req, res) => {
             } else {
                 res.json({
                     success: false,
-                    msg: 'Wrong Password!!!'
+                    msg: 'Wrong Password!!!',
+                    node: 'password'
                 });
             }
         }

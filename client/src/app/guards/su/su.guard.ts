@@ -9,7 +9,8 @@ declare var $: any;
 @Injectable({
   providedIn: 'root'
 })
-export class UserStudentGuard implements CanActivate {
+
+export class SuGuard implements CanActivate{
   constructor(private router: Router,
     public authService: AuthenticateService,
     public translate: TranslateService) { }
@@ -24,7 +25,7 @@ export class UserStudentGuard implements CanActivate {
       return false;
     } else {
       var user = JSON.parse(localStorage.getItem('user'));
-      if (user.type === 'E') {
+      if (user.type == 'S') {
         return true;
       } else {
         switch(user.type){
@@ -34,8 +35,8 @@ export class UserStudentGuard implements CanActivate {
           case 'P':
           this.router.navigate(['/dashboard/0100']);
           break;
-          case 'S':
-          this.router.navigate(['/dashboard/0001']);
+          case 'E':
+          this.router.navigate(['/dashboard/1000']);
           break;
           default:
           this.router.navigate(['/home']);

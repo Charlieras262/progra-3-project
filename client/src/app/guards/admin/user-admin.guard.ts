@@ -18,26 +18,32 @@ export class UserAdminGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     if (!this.authService.loggedIn()) {
       this.router.navigate(['/login']);
-      this.translate.get('admin_guard_msg').subscribe(res => {
+      this.translate.get('login_guard_msg').subscribe(res => {
         $.toaster(res, '<i class="fa fa-exclamation-triangle"></i>', 'info');
       });
       return false;
     } else {
       var user = JSON.parse(localStorage.getItem('user'));
-      if (user.type === 'S') {
+      if (user.type === 'A') {
         return true;
       } else {
         switch(user.type){
           case 'E':
-          this.router.navigate(['/dashboard/100']);
+          this.router.navigate(['/dashboard/1000']);
           break;
           case 'P':
-          this.router.navigate(['/dashboard/010']);
+          this.router.navigate(['/dashboard/0100']);
+          break;
+          case 'S':
+          this.router.navigate(['/dashboard/0001']);
           break;
           default:
           this.router.navigate(['/home']);
           break;
         }
+        this.translate.get('su_guard_msg').subscribe(res => {
+          $.toaster(res, '<i class="fa fa-exclamation-triangle"></i>', 'info');
+        });
         return false;
       }
     }

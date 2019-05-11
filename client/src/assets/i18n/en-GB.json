@@ -2,7 +2,6 @@
 	"404.back_msg": "Return to Homepage!",
 	"404.sub_title": "The page you're looking for doesn't exist.",
 	"404.title": "Page not found",
-	"admin_guard_msg": "You need to log in as Administrator.",
 	"aint_reg": "I don't have an account yet.",
 	"appname": "Brainsco",
 	"conf": "Settings",
@@ -17,13 +16,12 @@
 	"inbox": "Inbox",
 	"language": "Language",
 	"login": "Login",
-	"login_guard_msg": "It is necessary to log in.",
+	"login_guard_msg": "You must first log in.",
 	"login_user_title": "Login User",
 	"logout": "Log out",
 	"pass": "Password",
 	"profile": "Profile",
 	"singup": "Register",
-	"student_guard_msg": "You need to log in as a Student.",
-	"teacher_guard_msg": "You need to log in as a Teacher.",
+	"su_guard_msg": "You do not have the necessary permits.",
 	"welcome": "Welcome"
 }
