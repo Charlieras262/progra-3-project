@@ -12,6 +12,10 @@ studentCTRL.getStudents = async(req, res) => {
     });
 }
 
+studentCTRL.getStudentsAmount = async(req, res) => {
+    res.json(await Student.find().countDocuments());
+}
+
 studentCTRL.getStudent = async(req, res) => {
     await Student.findById(req.params.id).populate('course_asigned').exec((err, course) => {
         if (err) throw err;
