@@ -156,6 +156,35 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>calc</name>
+                <definition_loaded>false</definition_loaded>
+                <description></description>
+                <comment></comment>
+                <default_text></default_text>
+                <translations>
+                    <translation>
+                        <language>en-GB</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>es-ES</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>es-GT</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>es-MX</language>
+                        <approved>false</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>conf</name>
                 <definition_loaded>false</definition_loaded>
                 <description></description>
@@ -538,6 +567,35 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>firstname</name>
+                <definition_loaded>false</definition_loaded>
+                <description></description>
+                <comment></comment>
+                <default_text></default_text>
+                <translations>
+                    <translation>
+                        <language>en-GB</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>es-ES</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>es-GT</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>es-MX</language>
+                        <approved>false</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>getStarted</name>
                 <definition_loaded>false</definition_loaded>
                 <description></description>
@@ -857,6 +915,35 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>prefered</name>
+                <definition_loaded>false</definition_loaded>
+                <description></description>
+                <comment></comment>
+                <default_text></default_text>
+                <translations>
+                    <translation>
+                        <language>en-GB</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>es-ES</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>es-GT</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>es-MX</language>
+                        <approved>false</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>profile</name>
                 <definition_loaded>false</definition_loaded>
                 <description></description>
@@ -885,40 +972,6 @@
                     </translation>
                 </translations>
             </concept_node>
-            <folder_node>
-                <name>register</name>
-                <children>
-                    <concept_node>
-                        <name>firstname</name>
-                        <definition_loaded>false</definition_loaded>
-                        <description></description>
-                        <comment></comment>
-                        <default_text></default_text>
-                        <translations>
-                            <translation>
-                                <language>en-GB</language>
-                                <approved>false</approved>
-                            </translation>
-                            <translation>
-                                <language>en-US</language>
-                                <approved>false</approved>
-                            </translation>
-                            <translation>
-                                <language>es-ES</language>
-                                <approved>false</approved>
-                            </translation>
-                            <translation>
-                                <language>es-GT</language>
-                                <approved>false</approved>
-                            </translation>
-                            <translation>
-                                <language>es-MX</language>
-                                <approved>false</approved>
-                            </translation>
-                        </translations>
-                    </concept_node>
-                </children>
-            </folder_node>
             <concept_node>
                 <name>singup</name>
                 <definition_loaded>false</definition_loaded>
