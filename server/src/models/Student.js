@@ -9,6 +9,7 @@ const StudentSchema = new Schema({
     cui: { type: String, required: true },
     tel: { type: String, require: true },
     address: { type: String, require: true },
+    val_code: { type: String, require: true },
     course_asigned: [{ type: Schema.ObjectId, ref: 'Course', required: false }]
 });
 
