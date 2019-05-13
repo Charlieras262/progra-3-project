@@ -9,7 +9,7 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
-                <a class="nav-link" [routerLink]="['']" routerLinkActive="router-link-active"><i class="fa fa-home" aria-hidden="true"></i> {{ 'home' | translate }} </a>
+                <a class="nav-link" [routerLink]="['/home']" routerLinkActive="router-link-active"><i class="fa fa-home" aria-hidden="true"></i> {{ 'home' | translate }} </a>
             </li>
             <li *ngIf="authService.loggedIn()" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link" [routerLink]="[getDashboardRoute()]" routerLinkActive="router-link-active"><i class="fa fa-calendar-minus-o" aria-hidden="true"></i> {{ 'dashboard' | translate }}</a>
