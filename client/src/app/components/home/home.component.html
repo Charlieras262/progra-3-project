@@ -1,15 +1,56 @@
-<div class="container">
-    <div id="home" class="hero-area">
-        <div class="home-wrapper">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8">
-                        <h1 class="text-info">{{'home_title' | translate}}</h1>
-                        <p class="lead white-text">{{'home_p' | translate}}</p>
-                        <a class="main-button icon-button" [routerLink]="[getRoute()]">{{'getStarted' | translate}}</a>
+<div class="container-100">
+    <div class="wrap-100">
+        <p class="title">{{'dashboard_su.title1' | translate}} <span class="text-info">{{'dashboard_su.title2' | translate}}</span></p>
+        <div>
+            <div class="centrar">
+                
+                <div class=" col-md-4  mb-2 mt-4 op" [routerLink]="['students']">
+                    <div class="inforide ">
+                        <div class="ride">
+                            <img src="public/images/stud.png">
+                        </div>
+                        <div class="fontsty">
+                            <h4>{{'dashboard_su.stu' | translate}}: {{estudiantes}}</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-md-4  mb-2 mt-4 op" [routerLink]="['teachers']">
+                    <div class="inforide">
+                        <div class="ride">
+                            <img src="public/images/prof.png">
+                        </div>
+                        <div class="fontsty">
+                            <h4>{{'dashboard_su.prof' | translate}}: {{maestros}}</h4>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="centrar">
+                <div class=" col-md-4  mb-2 mt-4 op" [routerLink]="['courses']">
+                    <div class="inforide">
+                        <div class="ride">
+                            <img src="public/images/cour.png">
+                        </div>
+                        <div class="fontsty">
+                            <h4>{{'dashboard_su.course' | translate}}: {{cursos}}</h4>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-2 mt-4 op" [routerLink]="['institutions']">
+                    <div class="inforide">
+                        <div class="ride">
+                            <img src="public/images/career.png">
+                        </div>
+                        <div class="fontsty">
+                            <h4>{{'dashboard_su.inst' | translate}}: {{instituciones}}</h4>
+                        </div>
+                    </div>
+                    
+                </div>
+               
+            </div>
+            
         </div>
     </div>
 </div>

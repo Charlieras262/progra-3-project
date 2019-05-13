@@ -1,151 +1,99 @@
-@import url(https://fonts.googleapis.com/css?family=Ubuntu:300);
-.contenedor {
-    font-family: "Roboto", sans-serif;
+.centrar{
+ display: flex;
+justify-content: center;
+
+}
+.inforide {
+    background-color: #131317;
+    border-radius: 8 px;
+    height: 175px;
+    position: relative;
+}
+
+.ride img {
+    margin-top: 5px;
+    width: 20%;
+}
+
+.op:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.op:active {
+    transform: scale(0.9);
+    border-color: transparent;
+}
+
+.op:focus {
+    outline: 0px;
+}
+
+.ride {
+    position: relative;
+    background-color: #cb3234;
+    padding-top: 15px;
+    border-radius: 8px 8px 0px 0px;
+    text-align: center;
+    height: 50%;
+}
+
+.fontsty {
+    position: relative;
+    text-align: center;
+}
+
+.fontsty h4 {
+    color: #6E6E6E;
+    font-family: Poppins-Bold;
+    font-size: 15px;
+    margin-top: 45px;
+}
+
+.wrap-btn {
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 10px;
+}
+
+.container-100 {
+    width: 100%;
+    min-height: 100vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    padding: 15px;
 }
 
-.contenedor h1 {
+.wrap-100 {
+    width: 1000px;
+    background: #0d0e12;
+    border-radius: 10px;
+    overflow: hidden;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    flex-wrap: wrap;
     text-align: center;
-    font-size: 68px;
+    padding: 50px 90px 50px 90px;
 }
 
-.contenedor .contenedor-botones {
-    display: flex;
-    width: 500px;
-}
-
-.contenedor .contenedor-botones button {
-    outline: none;
-    margin: 10px;
-    width: 100%;
-    padding: 20px 10px;
-    border: 0px;
-    background: #ffee6d;
-    border-radius: 30px;
-    font-size: 14px;
-}
-
-.contenedor .contenedor-botones button.active {
-    background: #fa6617;
-}
-
-.hero-area {
-    position: relative;
-    padding-top: 80px;
-    padding-bottom: 80px;
-}
-
-#home.hero-area {
-    height: calc(100vh - 80px);
-    padding-top: 0px;
-    padding-bottom: 0px;
-}
-
-.home-wrapper {
-    position: absolute;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-    left: 0;
-    right: 0;
-}
-
-
-/* -- Breadcrumb -- */
-
-.hero-area-tree li {
-    display: inline-block;
-    font-family: 'Lato', sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    color: #CB3234;
-}
-
-.hero-area-tree li>a {
-    color: #CB3234;
-}
-
-.hero-area-tree li+li:before {
-    content: "/";
-    display: inline-block;
-    margin: 0px 5px;
-    color: #CB3234;
-}
-
-
-/* --- Buttons --- */
-
-.main-button {
-    position: relative;
-    display: inline-block;
-    padding: 10px 30px;
-    background-color: #CB3234;
-    border: 2px solid transparent;
-    border-radius: 40px;
-    color: #FFF;
-    -webkit-transition: 0.2s all;
-    transition: 0.2s all;
-}
-
-.main-button:hover,
-.main-button:focus {
-    background-color: #fff;
-    border: 2px solid #CB3234;
-    color: #CB3234;
-}
-
-.main-button.icon-button:hover,
-.main-button.icon-button:focus {
-    padding-right: 45px;
-}
-
-.main-button.icon-button:after {
-    content: "\f090";
-    font-family: FontAwesome;
-    position: absolute;
-    width: 30px;
-    right: 15px;
+.title {
+    font-family: Poppins-Bold;
+    font-size: 40px;
+    color: #333333;
     text-align: center;
-    opacity: 0;
-    -webkit-transition: 0.2s all;
-    transition: 0.2s all;
-}
-
-.main-button.icon-button:hover:after,
-.main-button.icon-button:focus:after {
-    opacity: 1;
-}
-
-.svgContainer {
-    position: relative;
-    display: flex;
     width: 100%;
-}
-
-svg {
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-svg path {
-    stroke-dasharray: 100%;
-    stroke-dashoffset: 0;
-    stroke: #0B0B10;
-    animation: dash 1s ease-in;
-}
-
-@keyframes dash {
-    from {
-        stroke-dashoffset: 100%;
-    }
-    to {
-        stroke-dashoffset: 0;
-    }
+    display: block;
 }

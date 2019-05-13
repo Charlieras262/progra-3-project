@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthenticateService } from 'src/app/services/authenticate/authenticate.service';
+import { EstudiantesService } from 'src/app/services/estudiantes/estudiantes.service';
 
 declare var $: any;
 
@@ -12,16 +13,18 @@ declare var $: any;
 export class HomeComponent implements OnInit {
 
   activeLang = 'en'
+   estudiantes = 0
+   maestros = 0
+   instituciones = 0
+   cursos = 0
 
   constructor(private translate: TranslateService,
-    public authService: AuthenticateService) { }
+    public authService: AuthenticateService, public servicioEstudiantes:EstudiantesService) { }
 
   ngOnInit() {
-    $('.txt').html(function (i, html) {
-      var chars = $.trim(html).split("");
-
-      return '<span>' + chars.join('</span><span>') + '</span>';
-    });
+    
+   
+    this.obtenerUsuario()
   }
 
   getRoute() {
@@ -48,4 +51,11 @@ export class HomeComponent implements OnInit {
     this.activeLang = lang;
     this.translate.use(lang);
   }
+
+obtenerUsuario(){
+this.servicioEstudiantes.obtenerUsuario().subscribe(res => {
+  var data = JSON.parse(JSON.stringify(res)); 
+  this.estudiantes= data.length
+});
+}
 }
