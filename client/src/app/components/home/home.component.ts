@@ -13,18 +13,16 @@ declare var $: any;
 export class HomeComponent implements OnInit {
 
   activeLang = 'en'
-   estudiantes = 0
-   maestros = 0
-   instituciones = 0
-   cursos = 0
+  estudiantes = 0
+  maestros = 0
+  instituciones = 0
+  cursos = 0
 
   constructor(private translate: TranslateService,
-    public authService: AuthenticateService, public servicioEstudiantes:EstudiantesService) { }
+    public authService: AuthenticateService, public servicioEstudiantes: EstudiantesService) { }
 
   ngOnInit() {
-    
-   
-    this.obtenerUsuario()
+    this.getStudentsAmount();
   }
 
   getRoute() {
@@ -34,13 +32,13 @@ export class HomeComponent implements OnInit {
       const user = JSON.parse(localStorage.getItem('user'));
       switch (user.type) {
         case 'S':
-        return '/dashboard/0001';
+          return '/dashboard/0001';
         case 'A':
-        return '/dashboard/0010';            
+          return '/dashboard/0010';
         case 'P':
-        return '/dashboard/0100';
+          return '/dashboard/0100';
         case 'E':
-        return '/dashboard/1000';
+          return '/dashboard/1000';
         default:
           return '/home'
       }
@@ -52,10 +50,9 @@ export class HomeComponent implements OnInit {
     this.translate.use(lang);
   }
 
-obtenerUsuario(){
-this.servicioEstudiantes.obtenerUsuario().subscribe(res => {
-  var data = JSON.parse(JSON.stringify(res)); 
-  this.estudiantes= data.length
-});
-}
+  getStudentsAmount() {
+    this.servicioEstudiantes.getStudentsAmount().subscribe(res => {
+      this.estudiantes = res as number;
+    });
+  }
 }
