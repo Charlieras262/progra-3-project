@@ -1,32 +1,79 @@
-<div class="container">
-  <div class="row">
-      <div class="col-md-6 mt-5 mx-auto">
-          <form (submit)="register()">
-            <h2 class="text-info mb-5 text-center brand">Registrarse</h2>
-              <div class="form-group">
-                  <label for="first_name">Primer Nombre</label>
-                  <input type="text" class="form-control" name="first_name" placeholder="Ingrese un Nombre"
-                      [(ngModel)]="credentials.first_name">
-              </div>
-              <div class="form-group">
-                  <label for="last_name">Apellido </label>
-                  <input type="text" class="form-control" name="last_name" placeholder="Ingrese un Apellido" [(ngModel)]="credentials.last_name">
-              </div>
-              <div class="form-group">
-                  <label for="email">Correo Electronico</label>
-                  <input type="email" class="form-control" name="email" placeholder="Ingresar Email" [(ngModel)]="credentials.email">
-              </div>
-              <div class="form-group">
-                  <label for="password">Contraseña </label>
-                  <input type="password" class="form-control" name="password" placeholder="Ingresar Password"
-                      [(ngModel)]="credentials.password">
-              </div>
-              <div class="form-group">
-                <label for="last_name">Codigo De Validacion </label>
-                <input type="text" class="form-control" name="last_name" placeholder="Ingrese un Nombre" [(ngModel)]="credentials.last_name">
+<div class="limiter">
+    <div class="container-login">
+        <div class="wrap-login">
+            <div class="login-pic" data-tilt>
+                <img src="public/images/user.png" alt="IMG">
             </div>
-              <button class="btn btn-info col-md-12 mt-4" type="submit">Registrarse</button>
-          </form>
-      </div>
-  </div>
+            <form class="mt-2" #studentForm="ngForm" (ngSubmit)="onRegisterUser()">
+                <h2 class="text-info mb-5 text-center brand">{{'register.title' | translate}}</h2>
+                <div id="username" class="form-group wrap-input" data-toggle="popover">
+                    <input type="text" name="username" class="form-control input" placeholder="{{'register.username' | translate}}" [(ngModel)]="username">
+                    <span class="focus-input"></span>
+                    <span class="symbol-input">
+                      <i class="fa fa-user" aria-hidden="true"></i>
+                    </span>
+                    <span class="input-valid">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                    </span>
+                    <span class="input-invalid shake">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div id="email" class="form-group wrap-input">
+                    <input type="email" name="email" class="form-control input" aria-describedby="emailHelp" placeholder="{{'email' | translate}}" [(ngModel)]="email">
+                    <span class="focus-input"></span>
+                    <span class="symbol-input">
+                      <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </span>
+                    <span class="input-valid">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                    </span>
+                    <span class="input-invalid shake">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div id="valcode" class="form-group wrap-input">
+                    <input type="text" name="valcode" class="form-control input" placeholder="{{'register.valcode' | translate}}" [(ngModel)]="valcode">
+                    <span class="focus-input"></span>
+                    <span class="symbol-input">
+                        <i class="fa fa-id-card" aria-hidden="true"></i>
+                    </span>
+                    <span class="input-valid">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                    </span>
+                    <span class="input-invalid shake">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div id="password" class="form-group wrap-input">
+                    <input name="passoword" type="password" class="form-control input" placeholder="{{'pass' | translate}}" [(ngModel)]="password">
+                    <span class="focus-input"></span>
+                    <span class="symbol-input">
+                    <i class="fa fa-lock"></i>
+                    </span>
+                    <span class="input-valid">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                    </span>
+                    <span class="input-invalid shake">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div id="confPass" class="form-group wrap-input">
+                    <input name="confPass" type="password" class="form-control input" placeholder="{{'pass' | translate}}" [(ngModel)]="confPass">
+                    <span class="focus-input"></span>
+                    <span class="symbol-input">
+                    <i class="fa fa-lock"></i>
+                    </span>
+                    <span class="input-valid">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                    </span>
+                    <span class="input-invalid shake">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <button class="btn btn-info col-md-12" type="submit">{{'register.btn1' | translate}}</button>
+                <button class="btn btn-dark col-md-12 mt-2" type="button" [routerLink]="['/login']" routerLinkActive="router-link-active">{{'register.btn2' | translate}}</button>
+            </form>
+        </div>
+    </div>
 </div>

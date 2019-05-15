@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthenticateService } from 'src/app/services/authenticate/authenticate.service';
-import { EstudiantesService } from 'src/app/services/estudiantes/estudiantes.service';
+import { StudentService } from 'src/app/services/students/student.service';
 
 declare var $: any;
 
@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   cursos = 0
 
   constructor(private translate: TranslateService,
-    public authService: AuthenticateService, public servicioEstudiantes: EstudiantesService) { }
+    public authService: AuthenticateService, public servicioEstudiantes: StudentService) { }
 
   ngOnInit() {
     this.getStudentsAmount();

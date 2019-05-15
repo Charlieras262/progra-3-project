@@ -2120,13 +2120,8 @@ pre code {
     color: #666666;
     background-clip: padding-box;
     border-color: transparent;
-    border-bottom-color: transparent;
-    border-radius: 30px;
     outline: 0 none;
-    -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
-    transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    box-shadow: transparent;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -6724,7 +6719,7 @@ a.close.disabled {
     z-index: 1060;
     display: block;
     max-width: 276px;
-    font-family: "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-family: Poppins-Regular;
     font-style: normal;
     font-weight: 400;
     line-height: 1.5;
@@ -6740,9 +6735,9 @@ a.close.disabled {
     line-break: auto;
     font-size: 0.765625rem;
     word-wrap: break-word;
-    background-color: #fff;
+    background-color: rgba(203, 50, 52);
     background-clip: padding-box;
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    border: 1px solid transparent;
     border-radius: 0;
 }
 
@@ -6784,7 +6779,7 @@ a.close.disabled {
 .bs-popover-auto[x-placement^="top"]>.arrow::after {
     bottom: 1px;
     border-width: 0.5rem 0.5rem 0;
-    border-top-color: #fff;
+    border-top-color: #cb3234;
 }
 
 .bs-popover-right,
@@ -6804,14 +6799,16 @@ a.close.disabled {
 .bs-popover-auto[x-placement^="right"]>.arrow::before {
     left: 0;
     border-width: 0.5rem 0.5rem 0.5rem 0;
-    border-right-color: rgba(0, 0, 0, 0.25);
+    border-right-color: rgba(203, 50, 52);
+    ;
 }
 
 .bs-popover-right>.arrow::after,
 .bs-popover-auto[x-placement^="right"]>.arrow::after {
     left: 1px;
     border-width: 0.5rem 0.5rem 0.5rem 0;
-    border-right-color: #fff;
+    border-right-color: rgba(203, 50, 52);
+    ;
 }
 
 .bs-popover-bottom,
@@ -6835,7 +6832,7 @@ a.close.disabled {
 .bs-popover-auto[x-placement^="bottom"]>.arrow::after {
     top: 1px;
     border-width: 0 0.5rem 0.5rem 0.5rem;
-    border-bottom-color: #fff;
+    border-bottom-color: #cb3234;
 }
 
 .bs-popover-bottom .popover-header::before,
@@ -6874,18 +6871,17 @@ a.close.disabled {
 .bs-popover-auto[x-placement^="left"]>.arrow::after {
     right: 1px;
     border-width: 0.5rem 0 0.5rem 0.5rem;
-    border-left-color: #fff;
+    border-left-color: #cb3234;
 }
 
 .popover-header {
     padding: 0.5rem 0.75rem;
     margin-bottom: 0;
     font-size: 0.875rem;
-    color: #1a1a1a;
-    background-color: #f7f7f7;
-    border-bottom: 1px solid #ebebeb;
-    border-top-left-radius: calc(0 - 1px);
-    border-top-right-radius: calc(0 - 1px);
+    color: #fff;
+    background-color: transparent;
+    border-bottom: 1px solid transparent;
+    border-radius: 10px;
 }
 
 .popover-header:empty {
@@ -6894,7 +6890,8 @@ a.close.disabled {
 
 .popover-body {
     padding: 0.5rem 0.75rem;
-    color: #919aa1;
+    color: #fff;
+    border-radius: 10px;
 }
 
 .carousel {

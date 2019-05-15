@@ -1,3 +1,141 @@
-<p>
-  students works!
-</p>
+<div class="limiter">
+    <div class="container-login">
+        <div class="wrap-login">
+            <div class="login-pic" data-tilt>
+                <img src="public/images/stud.png" alt="IMG">
+            </div>
+            <form class="mt-2" #studentForm="ngForm" (ngSubmit)="createStudent(studentForm)">
+                <h2 class="text-info mb-5 text-center brand">{{'student.title' | translate}}</h2>
+                <div id="inst" class="form-group wrap-input" data-toggle="popover">
+                    <input type="text" name="inst" class="form-control input" placeholder="{{'student.inst' | translate}}" [(ngModel)]="inst">
+                    <span class="focus-input"></span>
+                    <span class="symbol-input">
+                      <i class="fa fa-id-card" aria-hidden="true"></i>
+                    </span>
+                    <span class="input-valid">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                    </span>
+                    <span class="input-invalid shake">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div class="wrap-input-inline">
+                    <div id="name" class="form-group wrap-input">
+                        <input type="name" name="name" class="form-control input" placeholder="{{'student.name' | translate}}" [(ngModel)]="name">
+                        <span class="focus-input"></span>
+                        <span class="symbol-input">
+                          <i class="fa fa-user" aria-hidden="true"></i>
+                        </span>
+                        <span class="input-valid">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                        </span>
+                        <span class="input-invalid shake">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <div id="lastname" class="form-group wrap-input">
+                        <input type="name" name="lastname" class="form-control input" placeholder="{{'student.lastname' | translate}}" [(ngModel)]="lastname">
+                        <span class="focus-input"></span>
+                        <span class="symbol-input">
+                          <i class="fa fa-user" aria-hidden="true"></i>
+                        </span>
+                        <span class="input-valid">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                        </span>
+                        <span class="input-invalid shake">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                </div>
+                <div id="fnac" class="form-group wrap-input">
+                    <input type="text" name="fnac" class="form-control input" placeholder="{{'student.fnac' | translate}}" [(ngModel)]="fnac">
+                    <span class="focus-input"></span>
+                    <span class="symbol-input">
+                      <i class="fa fa-calendar" aria-hidden="true"></i>
+                    </span>
+                    <span class="input-valid">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                    </span>
+                    <span class="input-invalid shake">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div id="tel" class="form-group wrap-input">
+                    <input type="text" name="tel" class="form-control input" placeholder="{{'student.tel' | translate}}" [(ngModel)]="tel">
+                    <span class="focus-input"></span>
+                    <span class="symbol-input">
+                      <i class="fa fa-phone prefix" aria-hidden="true"></i>
+                    </span>
+                    <span class="input-valid">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                    </span>
+                    <span class="input-invalid shake">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div id="cui" class="form-group wrap-input">
+                    <input type="text" name="cui" class="form-control input" placeholder="{{'student.cui' | translate}}" [(ngModel)]="cui">
+                    <span class="focus-input"></span>
+                    <span class="symbol-input">
+                      <i class="fa fa-id-card" aria-hidden="true"></i>
+                    </span>
+                    <span class="input-valid">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                    </span>
+                    <span class="input-invalid shake">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div id="address" class="form-group wrap-input">
+                    <input type="text" name="address" class="form-control input" placeholder="{{'student.address' | translate}}" [(ngModel)]="address">
+                    <span class="focus-input"></span>
+                    <span class="symbol-input">
+                      <i class="fa fa-building-o" aria-hidden="true"></i>
+                    </span>
+                    <span class="input-valid">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                    </span>
+                    <span class="input-invalid shake">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div class="wrap-btn-inline">
+                    <button class="btn btn-info col-md-6" type="submit">{{'student.title' | translate}}</button>
+                    <button class="btn btn-dark col-md-6" type="button" (click)="cleanForm(studentForm)">{{'student.cancel' | translate}}</button>
+                </div>
+            </form>
+        </div>
+        <div class="table-container mt-4">
+            <table class="table-rwd">
+                <thead>
+                    <th style="min-width: 150px" scope="col" class="tb-title table-primary">Carné</th>
+                    <th style="min-width: 150px" scope="col" class="tb-title table-primary">First Name</th>
+                    <th style="min-width: 150px" scope="col" class="tb-title table-primary">Last Name</th>
+                    <th style="min-width: 150px" scope="col" class="tb-title table-primary">Date of Born</th>
+                    <th scope="col" class="tb-title table-primary">CUI</th>
+                    <th style="min-width: 100px" scope="col" class="tb-title table-primary">Telephone</th>
+                    <th scope="col" class="tb-title table-primary">Address</th>
+                    <th style="min-width: 250px" scope="col" class="tb-title table-primary">Courses Asigned</th>
+                    <th scope="col" class="tb-title table-primary">Operations</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let student of studentService.students">
+                        <td>{{student._id}}</td>
+                        <td>{{student.name}}</td>
+                        <td>{{student.lastName}}</td>
+                        <td>{{student.fnac}}</td>
+                        <td>{{student.cui}}</td>
+                        <td>{{student.tel}}</td>
+                        <td>{{student.address}}</td>
+                        <td *ngIf="coursesNames(student)">{{coursesNames(student)}}</td>
+                        <td *ngIf="!coursesNames(student)">No courses assigned</td>
+                        <td ng-if="showTooltip" class="text-center">
+                            <i class="fa fa-pencil-square-o op-icon" style="margin-right: 15px;" aria-hidden="true" data-toggle="tooltip" data-placement="right" data-original-title="Edit" title="Edit Student"></i>
+                            <i class="fa fa-trash-o op-icon" aria-hidden="true" data-toggle="tooltip" data-placement="right" data-original-title="Delete" title="Delete Student"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

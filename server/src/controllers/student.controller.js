@@ -1,4 +1,5 @@
 const Student = require('../models/Student');
+const Validations = require('../controllers/validations/general.validation');
 const studentCTRL = {};
 
 studentCTRL.getStudents = async(req, res) => {
@@ -28,11 +29,30 @@ studentCTRL.getStudent = async(req, res) => {
 }
 
 studentCTRL.createStudent = async(req, res) => {
-    const student = new Student(req.body);
-    await student.save();
-    res.json({
-        status: 'Student Created'
+    const student = new Student({
+        _id: req.body._id,
+        name: req.body.name,
+        lastName: req.body.lastName,
+        fnac: req.body.fnac,
+        cui: req.body.cui,
+        tel: req.body.tel,
+        address: req.body.address,
+        val_code: req.body.val_code,
     });
+    if (await Student.findById(student._id).countDocuments() == 0) {
+        student.val_code = await Validations.generateVerifyCode('E');
+        student._id = await Validations.generateStudentCode(req.body.inst_code);
+        await student.save().then(student => {
+            res.json('student.created');
+        }).catch(err => {
+            throw err;
+        });
+    } else {
+        res.json({
+            msg: 'ID is already registered',
+            success: false
+        });
+    }
 }
 
 studentCTRL.editStudent = async(req, res) => {
