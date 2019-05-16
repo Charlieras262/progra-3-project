@@ -22,7 +22,8 @@ import { ReportsComponent } from './components/reports/reports.component';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'home'},
-  {path: 'home', component: HomeComponent},                                                     
+  {path: 'home', component: HomeComponent},
+  {path: 'dashboard', redirectTo: 'dashboard/1000'},                                
   {path: 'dashboard/0001', component: DashboardSuComponent, canActivate: [SuGuard]},                          
   {path: 'dashboard/0010', component: DashboardAdminComponent, canActivate: [UserAdminGuard]},
   {path: 'dashboard/0100', component: DashboardProfComponent, canActivate: [UserTeacherGuard]},

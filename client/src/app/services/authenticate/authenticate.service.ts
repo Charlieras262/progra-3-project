@@ -2,8 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ProjectVariable } from 'src/app/variables/projects.variables';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { TranslateService } from '@ngx-translate/core';
 
 const jwtHelper = new JwtHelperService();
+declare var $: any;
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +16,7 @@ export class AuthenticateService {
   authToken: any;
   user: any;
 
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient, public translate: TranslateService) { }
 
   authUserCredentials(user, flag) {
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
@@ -27,16 +30,67 @@ export class AuthenticateService {
     }
   }
 
-  checkField(fieldData, idInput) {
+  checkField(fieldData, idInput, fieldname) {
     const node = document.getElementById(idInput);
     if (fieldData === undefined || fieldData === ' ' || fieldData === '') {
       node.classList.remove('valid');
       node.classList.add('invalid');
-      return false;
+      return {msg: `${this.translate.instant('student.field1')} ${fieldname} ${this.translate.instant('student.field2')}`, success: false};
     } else {
       node.classList.remove('invalid');
       node.classList.add('valid');
-      return true;
+      return {msg: '', success: true};
+    }
+  }
+
+  valField(val, msg, id, fieldname) {
+    if (!val) {
+      $('#' + id).popover({
+        title: 'Error',
+        content: msg,
+        html: false,
+        trigger: 'focus'
+      });
+      $('#' + id).on('input', () => {
+        $('#' + id).popover('hide');
+        const data = this.checkField($('#' + id).children()[0].value, id, fieldname);
+        this.valField(data.success, data.msg, id, fieldname);
+      })
+    } else {
+      $('#' + id).popover('dispose');
+    }
+  }
+
+  valFieldShow(val, msg, id, fieldname) {
+    if (!val) {
+      $('#' + id).popover({
+        title: 'Error',
+        content: msg,
+        html: false,
+        trigger: 'focus'
+      });
+      $('#' + id).popover('show')
+      $('#' + id).on('input', () => {
+        $('#' + id).popover('hide');
+        const data = this.checkField($('#' + id).children()[0].value, id, fieldname);
+        this.valField(data.success, data.msg, id, fieldname);
+      })
+    } else {
+      $('#' + id).popover('dispose');
+    }
+  }
+
+  valPassField(val, msg, id) {
+    if (!val) {
+      $('#' + id).popover({
+        title: 'Error',
+        content: msg,
+        html: false,
+        trigger: 'focus'
+      });
+      $('#' + id).popover('show')
+    } else {
+      $('#' + id).popover('dispose');
     }
   }
 

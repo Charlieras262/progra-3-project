@@ -70,6 +70,7 @@ form {
     display: -ms-flexbox;
     display: flex;
     justify-content: center;
+    margin-top: -6px;
 }
 
 .wrap-btn-inline {
@@ -353,20 +354,20 @@ form {
 
 ::-webkit-scrollbar {
     height: 12px;
-    background-color: #0d0e12;
+    background-color: transparent;
 }
 
 ::-webkit-scrollbar-track {
     border-radius: 10px;
-    background-color: #0d0e12;
+    background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background-color: #131317;
+    background-color: #19191d;
 }
 
 ::-webkit-scrollbar-thumb:hover {
     border-radius: 10px;
-    background-color: #19191d;
+    background-color: #26262c;
 }

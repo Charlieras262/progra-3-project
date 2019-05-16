@@ -5,6 +5,8 @@ const Validations = require('./validations/general.validation');
 const config = require('../config/database');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const Student = require('../models/Student');
+const Teacher = require('../models/Teacher');
 
 /**
  * Este metodo obtiene la informacion del perfil de un usuario
@@ -42,28 +44,41 @@ UserController.getUser = async(req, res) => {
 UserController.createUser = async(req, res) => {
 
     var hash = bcrypt.hashSync(req.body.password, 10);
-    const userModel = {
-        name: req.body.name,
-        lastname: req.body.lastname,
+    const userModelReq = {
         username: req.body.username,
         email: req.body.email,
         password: hash,
-        type: req.body.type
+        valCode: req.body.valCode
     }
-    const user = new User(userModel)
-    const authRes = authUserInfo(user);
+    const authRes = await authUserInfo(userModelReq);
+
     if (authRes.success) {
-        User.findOne({ email: userModel.email }).countDocuments((err, number) => {
+        User.findOne({ email: userModelReq.email }).countDocuments(async(err, number) => {
             if (number !== 0) {
-                res.json({ success: false, msg: 'The email is already used.' });
+                res.json({ success: false, msg: 'alreadyEmail', node: 'email' });
             } else {
-                user.save();
-                res.json({ success: true, msg: 'User created' });
+                const addInfo = await valCode(userModelReq.valCode.toString());
+                if (!addInfo.success) {
+                    res.json(addInfo);
+                } else {
+                    const user = new User({
+                        name: addInfo.user.name,
+                        lastname: addInfo.user.lastname,
+                        username: req.body.username,
+                        email: req.body.email,
+                        password: hash,
+                        val_code: userModelReq.valCode,
+                        type: addInfo.user.type
+                    })
+                    user.save();
+                    res.json({ success: true, msg: 'userCreated' });
+                }
             }
         });
     } else {
         res.json(authRes);
     }
+
 };
 
 /**
@@ -74,7 +89,7 @@ UserController.createUser = async(req, res) => {
  */
 UserController.updateUser = async(req, res) => {
     const user = new User(req.body);
-    const authRes = authUserInfo(user);
+    const authRes = await authUserInfo(user);
     if (authRes.success) {
         await User.findByIdAndUpdate(req.params.id, user);
         res.json({ success: true, msg: 'User updated' });
@@ -99,7 +114,8 @@ var valEmail = (email) => {
     if (!re.test(email)) {
         return {
             success: false,
-            msg: 'Email Format is incorrect: abc123@abc.com. '
+            msg: 'emailFormat',
+            node: 'email'
         };
     } else {
         return {
@@ -125,7 +141,7 @@ UserController.authUserInfo = (req, res) => {
         if (!user) {
             res.json({
                 success: false,
-                msg: 'User not found!!, Please check the email',
+                msg: 'user404',
                 node: 'email'
             });
         } else {
@@ -149,7 +165,7 @@ UserController.authUserInfo = (req, res) => {
             } else {
                 res.json({
                     success: false,
-                    msg: 'Wrong Password!!!',
+                    msg: 'wrongPass',
                     node: 'password'
                 });
             }
@@ -157,36 +173,59 @@ UserController.authUserInfo = (req, res) => {
     });
 }
 
-const authUserInfo = (user) => {
-    const names = ['Name', 'Last Name', 'Username', 'Email', 'Password'];
-    // Se convierte un objeto http a string,
+const authUserInfo = async(user) => {
+    const names = ['Username', 'Email', 'Password', 'Request Code'];
+    // Se convierte un objeto observable a string,
     // luego a JSON y por ultimo a un arreglo
     var userJSON = JSON.parse(JSON.stringify(user));
     user = Object.values(userJSON);
     let res;
 
-    for (let i = 1; i < (user.length); i++) {
+    for (let i = 1; i < (names.length); i++) {
         res = generalValidations.isFilled(user[i], names[i - 1]);
         if (!res.success) return res;
     }
 
     var email = valEmail(userJSON.email);
 
-    if (email.success === false) {
+    if (!email.success) {
         return email;
     }
+
     return { success: true, msg: 'Everything is clear' };
 };
 
+const valCode = async(code) => {
+    const user = { type: '', name: '', lastname: '' };
+    var res = { msg: '', success: false, user: {} };
+    if (code.includes('P')) {
+        user.type = 'P';
+        const teacher = await Teacher.findOne({ val_code: code });
+        if (teacher) {
+            user.name = teacher.name;
+            user.lastname = teacher.lastName;
+            res = { msg: '', success: true, user };
+        } else {
+            res = { msg: 'valCodeWrong', success: false, node: 'valPass', user };
+        }
+    } else if (code.includes('E')) {
+        user.type = 'E';
+        const student = await Student.findOne({ val_code: code });
+        if (student) {
+            user.name = student.name;
+            user.lastname = student.lastName;
+            const userFinded = await User.findOne({ val_code: code });
+            if (!userFinded) {
+                res = { msg: '', success: true, user };
+            } else {
+                res = { msg: 'codeAlreadeRegister', node: 'valCode', success: false, user };
+            }
+        } else {
+            res = { msg: 'valCodeWrong', success: false, node: 'valCode', user };
+        }
+    }
+    return res;
+}
+
 // Se exporta el controllador para poder utilizarlo en las rutas
 module.exports = UserController;
-
-
-/*{
-	"name":"Carlos René",
-	"lastname":"Ramos López",
-	"username":"Charlie262",
-	"email":"charlyras262@gmail.com",
-	"password":"1234",
-	"type":"U"
-}*/

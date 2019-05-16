@@ -9,6 +9,7 @@ const UserSchema = new Schema({
     username: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
+    val_code: { type: String, required: false },
     type: { type: String, required: true }
 });
 

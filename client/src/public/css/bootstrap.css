@@ -3912,14 +3912,14 @@ input[type="button"].btn-block {
 
 .input-group>.form-control:not(:last-child),
 .input-group>.custom-select:not(:last-child) {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 .input-group>.form-control:not(:first-child),
 .input-group>.custom-select:not(:first-child) {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 
 .input-group>.custom-file {
@@ -4018,7 +4018,7 @@ input[type="button"].btn-block {
     padding: 2rem 3rem;
     font-size: 1.09375rem;
     line-height: 1.5;
-    border-radius: 0;
+    border-radius: 10px;
 }
 
 .input-group-sm>.form-control:not(textarea),
@@ -4035,7 +4035,7 @@ input[type="button"].btn-block {
     padding: 0.5rem 1rem;
     font-size: 0.765625rem;
     line-height: 1.5;
-    border-radius: 0;
+    border-radius: 10px;
 }
 
 .input-group-lg>.custom-select,
@@ -4223,31 +4223,31 @@ input[type="button"].btn-block {
 .custom-select {
     display: inline-block;
     width: 100%;
-    height: calc(1.5em + 1.5rem + 0);
+    height: 50px;
     padding: 0.75rem 3rem 0.75rem 2rem;
     font-size: 0.875rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #55595c;
+    color: #666666;
     vertical-align: middle;
     background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") no-repeat right 2rem center/8px 10px;
-    background-color: #f7f7f9;
-    border: 0 solid #ced4da;
-    border-radius: 0;
+    background-color: #131317;
+    border: 0 solid transparent;
+    border-radius: 25px;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
 }
 
 .custom-select:focus {
-    border-color: #5a5a5a;
+    border-color: transparent;
     outline: 0;
-    -webkit-box-shadow: 0 0 0 0.2rem rgba(26, 26, 26, 0.25);
-    box-shadow: 0 0 0 0.2rem rgba(26, 26, 26, 0.25);
+    -webkit-box-shadow: 0 0 0 0.2rem transparent;
+    box-shadow: 0 0 0 0.2rem transparent;
 }
 
 .custom-select:focus::-ms-value {
-    color: #55595c;
+    color: #666666;
     background-color: #f7f7f9;
 }
 
@@ -4260,7 +4260,7 @@ input[type="button"].btn-block {
 
 .custom-select:disabled {
     color: #919aa1;
-    background-color: #f7f7f9;
+    background-color: #131317;
 }
 
 .custom-select::-ms-expand {
@@ -6269,7 +6269,7 @@ a.badge-dark.focus {
     font-weight: 700;
     line-height: 1;
     color: #000;
-    text-shadow: 0 1px 0 #fff;
+    text-shadow: 0 1px 0 transparent;
     opacity: .5;
 }
 
@@ -6463,10 +6463,10 @@ a.close.disabled {
     flex-direction: column;
     width: 100%;
     pointer-events: auto;
-    background-color: #fff;
+    background-color: #0d0e12;
     background-clip: padding-box;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 0;
+    border: 1px solid transparent;
+    border-radius: 10px;
     outline: 0;
 }
 
@@ -6499,7 +6499,7 @@ a.close.disabled {
     -ms-flex-pack: justify;
     justify-content: space-between;
     padding: 1rem 1rem;
-    border-bottom: 1px solid #eceeef;
+    border-bottom: 1px solid #1c1c22;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
@@ -6533,7 +6533,7 @@ a.close.disabled {
     -ms-flex-pack: end;
     justify-content: flex-end;
     padding: 1rem;
-    border-top: 1px solid #eceeef;
+    border-top: 1px solid #1c1c22;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
 }

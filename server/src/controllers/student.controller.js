@@ -1,4 +1,5 @@
 const Student = require('../models/Student');
+const User = require('../models/User');
 const Validations = require('../controllers/validations/general.validation');
 const studentCTRL = {};
 
@@ -38,6 +39,7 @@ studentCTRL.createStudent = async(req, res) => {
         tel: req.body.tel,
         address: req.body.address,
         val_code: req.body.val_code,
+        registered: false
     });
     if (await Student.findById(student._id).countDocuments() == 0) {
         student.val_code = await Validations.generateVerifyCode('E');
@@ -58,14 +60,18 @@ studentCTRL.createStudent = async(req, res) => {
 studentCTRL.editStudent = async(req, res) => {
     await Student.findByIdAndUpdate(req.params.id, req.body);
     res.json({
-        status: 'Student Edited'
+        msg: 'stuUpdated',
+        success: true
     });
 }
 
 studentCTRL.deleteStudent = async(req, res) => {
+    const student = await Student.findById(req.params.id);
+    await User.findOneAndRemove({ val_code: student.val_code });
     await Student.findByIdAndRemove(req.params.id);
     res.json({
-        status: 'Student Deleted'
+        msg: 'stuDeleted',
+        success: true
     });
 }
 

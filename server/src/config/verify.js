@@ -12,8 +12,9 @@ module.exports.createAdminUser = () => {
             var user = JSON.parse(genVal.decrypt(userData))
             user.password = bcrypt.hashSync(JSON.parse(genVal.decrypt(userData)).password, 10)
             new User(user).save()
+            console.log('Super User Created');
         } else {
-            console.log('Admin User has already Created');
+            console.log('Admin User is already Created');
         }
     });
 }

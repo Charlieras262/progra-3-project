@@ -15,28 +15,30 @@ export class LoginComponent implements OnInit {
 
   email: string;
   password: string;
-  valfields = { email: false, password: false }
+  validations = { email: {msg:'', success: false}, password: {msg:'', success: false} }
   socket: any;
 
-  constructor(public translateService: TranslateService,
+  constructor(public translate: TranslateService,
     public authService: AuthenticateService,
     public router: Router) { }
 
   ngOnInit() {
-    this.checkEmailField();
-    this.checkPassField();
     this.socket = ProjectVariable.socket;
   }
 
   onLoginUser() {
-    this.valfields.email = this.authService.valEmailFormat(this.email);
-    this.valfields.password = this.authService.checkField(this.password, 'password');
-    if (this.valfields.email && this.valfields.password) {
+    this.translate.get('email').subscribe(res => {
+      this.validations.email = this.authService.checkField(this.email, 'email', res);
+    });
+    this.translate.get('password').subscribe(res => {
+      this.validations.password = this.authService.checkField(this.password, 'password', res);
+    });
+    if (this.validations.email.success && this.validations.password.success) {
       this.authService.authUserCredentials({ email: this.email, password: this.password }, 'l')
         .subscribe(res => {
           var data = JSON.parse(JSON.stringify(res));
           if (data.success) {
-            this.translateService.get('welcome').subscribe(res => {
+            this.translate.get('welcome').subscribe(res => {
               $.toaster(`${res} ${data.user.username}!`, '<i class="fa fa-check-circle"></i>', 'success');
             });
             this.authService.storeUserData(data.token, data.user);
@@ -59,24 +61,26 @@ export class LoginComponent implements OnInit {
                 break;
             }
           } else {
-            $.toaster(data.msg, '<i class="fa fa-times"></i>', 'danger');
             if (data.node === 'email') {
-              this.authService.checkIfField(false, 'email');
+              this.translate.get('email').subscribe(res => {
+                this.authService.checkIfField(data.success, 'email');
+                this.authService.valField(data.success, this.translate.instant(data.msg), 'email', res);
+              });
             } else {
-              this.authService.checkIfField(false, 'password');
+              this.translate.get('password').subscribe(res => {
+                this.authService.checkIfField(data.success, 'password');
+                this.authService.valField(data.success, this.translate.instant(data.msg), 'password', res);
+              });
             }
           }
         });;
+    } else {
+      this.translate.get('email').subscribe(res => {
+        this.authService.valField(this.validations.email.success, this.validations.email.msg, 'email', res);
+      });
+      this.translate.get('password').subscribe(res => {
+        this.authService.valField(this.validations.password.success, this.validations.password.msg, 'password', res);
+      });
     }
-  }
-
-  checkEmailField() {
-    const node = document.getElementById('email');
-    node.addEventListener('input', event => this.valfields.email = this.authService.valEmailFormat(this.email));
-  }
-
-  checkPassField() {
-    const node = document.getElementById('password');
-    node.addEventListener('input', event => this.valfields.password = this.authService.checkField(this.password, 'password'));
   }
 }
