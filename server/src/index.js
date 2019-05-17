@@ -5,6 +5,7 @@ const database = require('./database');
 const passport = require('passport');
 const methodOverride = require('method-override');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 require('./config/verify').createAdminUser();
@@ -36,6 +37,19 @@ app.use('/api/scores', require('./routes/score.routes'));
 app.use('/api/institutions', require('./routes/institution.routes'));
 app.use('/api/asignations', require('./routes/asignations.routes'));
 app.use('/api/students', require('./routes/students.routes'));
+
+// Set Static Folder
+
+app.use(express.static(path.join(__dirname, 'resources')));
+
+// Index Route
+app.get('/', (req, res) => {
+    res.send('invaild endpoint');
+});
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, './resources/index.html'));
+});
 
 // Starting Server
 var server = require('http').Server(app);

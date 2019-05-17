@@ -21,6 +21,18 @@ export class InstitutionsService {
     return this.http.get(this.API_URL, { headers: headers });
   }
 
+  createInstitutions(institution){
+    this.loadToken();
+    let headers = new HttpHeaders().set('Authorization', this.authToken);
+    return this.http.post(this.API_URL, institution, { headers: headers });
+  }
+
+  deleteInstitutions(id){
+    this.loadToken();
+    let headers = new HttpHeaders().set('Authorization', this.authToken);
+    return this.http.delete(this.API_URL+'/'+id, { headers: headers });
+  }
+
   loadToken() {
     const token = localStorage.getItem('id_token');
     this.authToken = token;

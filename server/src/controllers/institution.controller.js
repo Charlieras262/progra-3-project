@@ -14,9 +14,7 @@ institutionCTRL.getInstitution = async(req, res) => {
 institutionCTRL.createInstitution = async(req, res) => {
     const institution = new Institution(req.body);
     await institution.save();
-    res.json({
-        status: 'Institution Created'
-    });
+    res.json('instCreated');
 }
 
 institutionCTRL.editInstitutions = async(req, res) => {
@@ -28,9 +26,7 @@ institutionCTRL.editInstitutions = async(req, res) => {
 
 institutionCTRL.deleteInstitutions = async(req, res) => {
     await Institution.findByIdAndDelete(req.params.id);
-    res.json({
-        status: 'Institution Deleted'
-    });
+    res.json('instDeleted');
 }
 
 institutionCTRL.authInstitutionInfo = (req, res) => {
