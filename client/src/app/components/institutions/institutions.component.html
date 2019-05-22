@@ -6,8 +6,9 @@
             </div>
             <form class="mt-2" #institutionForm="ngForm" (ngSubmit)="createInstitution(institutionForm)">
                 <h2 class="text-info mb-5 text-center brand">{{'institution.title' | translate}}</h2>
+                <input hidden name="_id" type="text" value="{{_id}}" [(ngModel)]="_id">
                 <div id="code" class="form-group wrap-input">
-                    <input type="text" name="code" class="form-control input" placeholder="{{'institution.code' | translate}}" [(ngModel)]="code">
+                    <input type="text" name="code" class="form-control input" value="{{code}}" placeholder="{{'institution.code' | translate}}" [(ngModel)]="code">
                     <span class="focus-input"></span>
                     <span class="symbol-input">
                       <i class="fa fa-phone prefix" aria-hidden="true"></i>
@@ -20,7 +21,7 @@
                   </span>
                 </div>
                 <div id="name" class="form-group wrap-input">
-                    <input type="text" name="name" class="form-control input" placeholder="{{'institution.name' | translate}}" [(ngModel)]="name">
+                    <input type="text" name="name" class="form-control input" value="{{name}}" placeholder="{{'institution.name' | translate}}" [(ngModel)]="name">
                     <span class="focus-input"></span>
                     <span class="symbol-input">
                       <i class="fa fa-id-card" aria-hidden="true"></i>
@@ -33,7 +34,7 @@
                   </span>
                 </div>
                 <div class="wrap-btn-inline">
-                    <button class="btn btn-info col-md-6" type="submit">{{'institution.title' | translate}}</button>
+                    <button class="btn btn-info col-md-6" type="submit">{{btnPrimary}}</button>
                     <button class="btn btn-dark col-md-6" type="button" (click)="cleanForm(institutionForm)">{{'institution.cancel' | translate}}</button>
                 </div>
             </form>
@@ -49,8 +50,8 @@
                             <td>{{institution.code}}</td>
                             <td>{{institution.name}}</td>
                             <td ng-if="showTooltip" class="text-center">
-                                <i class="fa fa-pencil-square-o op-icon" style="margin-right: 15px;" aria-hidden="true" data-toggle="tooltip" data-placement="right" data-original-title="Edit" title="Edit Student"></i>
-                                <i class="fa fa-trash-o op-icon" aria-hidden="true" data-toggle="tooltip" data-placement="right" data-original-title="Delete" title="Delete Student" data-toggle="modal" data-target="#deleteConfirmation" (click)="selectInstitution(institution)"></i>
+                                <i class="fa fa-pencil-square-o op-icon" style="margin-right: 15px;" aria-hidden="true" data-toggle="tooltip" data-placement="right" data-original-title="Edit" title="Edit institution" (click)="selectInstitution(institution, 'E')"></i>
+                                <i class="fa fa-trash-o op-icon" aria-hidden="true" data-toggle="tooltip" data-placement="right" data-original-title="Delete" title="Delete institution" data-toggle="modal" data-target="#deleteConfirmation" (click)="selectInstitution(institution, 'D')"></i>
                             </td>
                         </tr>
                     </tbody>

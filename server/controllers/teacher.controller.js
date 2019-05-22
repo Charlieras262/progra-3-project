@@ -1,12 +1,17 @@
 const Teacher = require('../models/Teacher');
+const Validation = require('../controllers/validations/general.validation');
 const TeacherController = {};
+
+TeacherController.getTeachersAmount = async (req, res) => {
+  res.json(await Teacher.find().countDocuments());
+}
 
 TeacherController.getTeachers = async (req, res) => {
   const teacher = await Teacher.find();
   if (!teacher) {
-      return res.json({ success: false, msg: 'Teachers not found' })
+    return res.json({ success: false, msg: 'Teachers not found' })
   } else {
-      return res.json(teacher);
+    return res.json(teacher);
   }
 }
 
@@ -21,9 +26,20 @@ TeacherController.getTeacher = async (req, res) => {
 
 TeacherController.createTeacher = async (req, res) => {
   const teacher = new Teacher(req.body);
-  await teacher.save();
-  res.json({
-       status: 'Teacher created'
+  teacher._id = await Validation.generateTeacherCode();
+  teacher.valCode = await Validation.generateVerifyCode('P')
+  teacher.save(error => {
+    if(!error){
+      res.json({
+        success: true,
+        msg: 'profCreated'
+      });
+    } else {
+      res.json({
+        success: false,
+        msg: 'error'
+      });
+    }
   });
 }
 
@@ -39,7 +55,7 @@ TeacherController.updateTeacher = async (req, res) => {
 TeacherController.deleteTeacher = async (req, res) => {
   await Teacher.findByIdAndDelete(req.params.id);
   res.json({
-    status: 'Teacher Deleted'
+    msg: 'profDeleted'
   });
 }
 

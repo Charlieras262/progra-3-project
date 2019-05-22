@@ -15,8 +15,15 @@ export class AuthenticateService {
   readonly API_URL = ProjectVariable.serverLocation + 'api/users';
   authToken: any;
   user: any;
+  users: any;
 
   constructor(public http: HttpClient, public translate: TranslateService) { }
+
+
+  getUsers(){
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get(this.API_URL, { headers: headers });
+  }
 
   authUserCredentials(user, flag) {
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
@@ -40,6 +47,14 @@ export class AuthenticateService {
       node.classList.remove('invalid');
       node.classList.add('valid');
       return {msg: '', success: true};
+    }
+  }
+
+  valIfFieldIsEmpty(fieldData){
+    if(fieldData === undefined || fieldData === ' ' || fieldData === '' || fieldData === null){
+      return false;
+    } else {
+      return true;
     }
   }
 
@@ -114,6 +129,11 @@ export class AuthenticateService {
     }
   }
 
+  deleteUser(_id) {
+    this.loadToken();
+    let headers = new HttpHeaders().set('Authorization', this.authToken);
+    return this.http.delete(this.API_URL + `/${_id}`, { headers: headers });
+  }
   checkIfField(valid, id) {
     const node = document.getElementById(id);
     if (!valid) {

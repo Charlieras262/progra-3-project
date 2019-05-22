@@ -1,3 +1,141 @@
-<p>
-  teachers works!
-</p>
+<div class="limiter">
+  <div class="container-login">
+      <div class="wrap-login">
+          <div class="login-pic" data-tilt>
+              <img src="public/images/prof.png" alt="IMG">
+          </div>
+          <form class="mt-2" #teacherForm="ngForm" (ngSubmit)="createTeacher(teacherForm)">
+              <h2 class="text-info mb-5 text-center brand">{{'teacher.title' | translate}}</h2>
+              <div class="wrap-input-inline">
+                <input hidden name="_id" id="_id" type="text" [(ngModel)]="_id">
+                  <div id="name" class="form-group wrap-input">
+                      <input type="name" name="name" class="form-control input" placeholder="{{'teacher.name' | translate}}" [(ngModel)]="name">
+                      <span class="focus-input"></span>
+                      <span class="symbol-input">
+                          <i class="fa fa-user" aria-hidden="true"></i>
+                      </span>
+                      <span class="input-valid">
+                          <i class="fa fa-check" aria-hidden="true"></i>
+                      </span>
+                      <span class="input-invalid shake">
+                          <i class="fa fa-times" aria-hidden="true"></i>
+                      </span>
+                  </div>
+                  <div id="lastname" class="form-group wrap-input">
+                      <input type="name" name="lastname" class="form-control input" placeholder="{{'teacher.lastname' | translate}}" [(ngModel)]="lastname">
+                      <span class="focus-input"></span>
+                      <span class="symbol-input">
+                          <i class="fa fa-user" aria-hidden="true"></i>
+                      </span>
+                      <span class="input-valid">
+                          <i class="fa fa-check" aria-hidden="true"></i>
+                      </span>
+                      <span class="input-invalid shake">
+                          <i class="fa fa-times" aria-hidden="true"></i>
+                      </span>
+                  </div>
+              </div>
+              <div id="fnac" class="form-group wrap-input">
+                  <input type="text" name="fnac" class="form-control input" placeholder="{{'teacher.fnac' | translate}}" [(ngModel)]="fnac">
+                  <span class="focus-input"></span>
+                  <span class="symbol-input">
+                      <i class="fa fa-calendar" aria-hidden="true"></i>
+                  </span>
+                  <span class="input-valid">
+                      <i class="fa fa-check" aria-hidden="true"></i>
+                  </span>
+                  <span class="input-invalid shake">
+                      <i class="fa fa-times" aria-hidden="true"></i>
+                  </span>
+              </div>
+              <div id="cui" class="form-group wrap-input">
+                  <input type="text" name="cui" class="form-control input" placeholder="{{'teacher.cui' | translate}}" [(ngModel)]="cui">
+                  <span class="focus-input"></span>
+                  <span class="symbol-input">
+                      <i class="fa fa-id-card" aria-hidden="true"></i>
+                  </span>
+                  <span class="input-valid">
+                      <i class="fa fa-check" aria-hidden="true"></i>
+                  </span>
+                  <span class="input-invalid shake">
+                      <i class="fa fa-times" aria-hidden="true"></i>
+                  </span>
+              </div>
+              <div id="esp" class="form-group wrap-input">
+                  <input type="text" name="esp" class="form-control input" placeholder="{{'teacher.esp' | translate}}" [(ngModel)]="esp">
+                  <span class="focus-input"></span>
+                  <span class="symbol-input">
+                      <i class="fa fa-building-o" aria-hidden="true"></i>
+                  </span>
+                  <span class="input-valid">
+                      <i class="fa fa-check" aria-hidden="true"></i>
+                  </span>
+                  <span class="input-invalid shake">
+                      <i class="fa fa-times" aria-hidden="true"></i>
+                  </span>
+              </div>
+              <div class="wrap-btn-inline">
+                  <button class="btn btn-info col-md-6" type="submit">{{'teacher.title' | translate}}</button>
+                  <button class="btn btn-dark col-md-6" type="button" (click)="cleanForm(teacherForm)">{{'teacher.cancel' | translate}}</button>
+              </div>
+          </form>
+      </div>
+      <div class="table-container mt-4">
+          <table class="table-rwd">
+              <thead>
+                  <th style="min-width: 150px" scope="col" class="tb-title table-primary">
+                      {{'teacher._id' | translate}}</th>
+                  <th style="min-width: 150px" scope="col" class="tb-title table-primary">
+                      {{'teacher.name' | translate}}</th>
+                  <th style="min-width: 150px" scope="col" class="tb-title table-primary">
+                      {{'teacher.lastname' | translate}}</th>
+                  <th style="min-width: 150px" scope="col" class="tb-title table-primary">
+                      {{'teacher.fnac' | translate}}</th>
+                  <th scope="col" class="tb-title table-primary">CUI</th>
+                  <th scope="col" class="tb-title table-primary">{{'teacher.esp' | translate}}</th>
+                  <th style="min-width: 100px" scope="col" class="tb-title table-primary">
+                      {{'register.valCode' | translate}}</th>
+                  <th style="min-width: 100px" scope="col" class="tb-title table-primary">
+                      {{'teacher.assign' | translate}}</th>
+                  <th scope="col" class="tb-title table-primary">{{'teacher.ops' | translate}}</th>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let teacher of teacherService.teachers">
+                      <td>{{teacher._id}}</td>
+                      <td>{{teacher.name}}</td>
+                      <td>{{teacher.lastName}}</td>
+                      <td>{{teacher.fnac}}</td>
+                      <td>{{teacher.cui}}</td>
+                      <td>{{teacher.esp}}</td>
+                      <td>{{teacher.valCode}}</td>
+                      <td>{{teacher.asings}}</td>
+                      <td ng-if="showTooltip" class="text-center">
+                          <i class="fa fa-pencil-square-o op-icon" style="margin-right: 15px;" aria-hidden="true" data-toggle="tooltip" data-placement="right" data-original-title="Edit" title="Edit Teacher"></i>
+                          <i class="fa fa-trash-o op-icon" aria-hidden="true" data-toggle="tooltip" data-placement="right" data-original-title="Delete" title="Delete Teacher" data-toggle="modal" data-target="#deleteConfirmation" (click)="selectTeacher(teacher)"></i>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+
+<div class="modal" id="deleteConfirmation">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title text-info">{{'delConf' | translate}}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true" class="text-info"><i class="fa fa-times" aria-hidden="true"></i></span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <p>{{'delConfBodyProf' | translate}} "{{teacherSelected._id}} - {{teacherSelected.name}} {{teacherSelected.lastName}}"?</p>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-info" data-dismiss="modal" (click)="deleteTeacher()">{{'delConfOp1' | translate}}</button>
+              <button type="button" class="btn btn-dark" data-dismiss="modal" (click)="flushSelectedTeacher()">{{'delConfOp2' | translate}}</button>
+          </div>
+      </div>
+  </div>
+</div>

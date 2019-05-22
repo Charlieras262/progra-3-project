@@ -3,6 +3,7 @@ const config = require('../../config/database');
 const CryptoJS = require('crypto-js');
 const Student = require('../../models/Student');
 const Teacher = require('../../models/Teacher');
+const User = require('../../models/User');
 
 /**
  * Este metodo valida si un campo esta lleno o no,
@@ -28,7 +29,15 @@ validation.decrypt = (str) => {
     return bytes.toString(CryptoJS.enc.Utf8);
 }
 
-validation.generateVerifyCode = async(type) => {
+validation.generateTeacherCode = async (type) => {
+    let code = Math.round(Math.random() * (9999 - 1000) + 1000);
+    while (await Teacher.findById(code).countDocuments() > 0) {
+        code = Math.round(Math.random() * (9999 - 1000) + 1000);
+    }
+    return code.toString();
+}
+
+validation.generateVerifyCode = async (type) => {
     let code = Math.round(Math.random() * (9999 - 1000) + 1000);
     switch (type) {
         case 'E':
@@ -40,13 +49,14 @@ validation.generateVerifyCode = async(type) => {
             while (await Teacher.findOne({ val_code: `P-${code}` })) {
                 code = Math.round(Math.random() * (9999 - 1000) + 1000);
             }
+            break;
         default:
             break;
     }
     return `${type}-${code}`;
 }
 
-validation.generateStudentCode = async(inst) => {
+validation.generateStudentCode = async (inst) => {
     const date = new Date();
     let code = Math.round(Math.random() * (99999 - 100) + 100);
     while (await Student.findOne({ _id: `${inst}-${date.getFullYear()}-${code}` }).countDocuments() > 0) {

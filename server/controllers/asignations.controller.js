@@ -15,35 +15,37 @@ asignationCTRL.getAsignation = async(req, res) => {
 
 asignationCTRL.createAsignation = async(req, res) => {
     const asignation = new Asignation(req.body)
-    await Course.getCoursebyCode(asignation.cod_course, async(err, course) => {
+    Course.getCoursebyCode(asignation.cod_course, async(err, course) => {
         if (err) throw err;
-        Student.getStudentbyCarne(asignation.carne_stud, (ex, stRes) => {
-            if (ex) throw ex;
-            const student = JSON.parse(JSON.stringify(stRes));
-            if (student.course_asigned.length < 5) {
-                var stFlag = true;
-                student.course_asigned.forEach(element => {
-                    if (asignation.cod_course === element.cod_course) {
-                        stFlag = false;
-                        return;
-                    }
-                });
-                if (stFlag) {
-                    asignation.save();
-                    Student.findByIdAndUpdate(asignation.carne_stud, { $push: { course_asigned: course._id } }, (err, student) => {
-                        if (student) {
-                            res.json({ success: true, msg: 'Asignation Added Successfuly' });
+        if(course){
+            Student.findById(asignation.carne_stud, (ex, stRes) => {
+                if (ex) throw ex;
+                const student = JSON.parse(JSON.stringify(stRes));
+                if(student){
+                    if (student.course_asigned.length < 5) {
+                        var stFlag = student.course_asigned.includes(''+course._id);
+                        if (!stFlag) {
+                            asignation.save();
+                            Student.findByIdAndUpdate(asignation.carne_stud, { $push: { course_asigned: course._id } }, (err, student) => {
+                                if (student) {
+                                    res.json({ success: true, msg: 'assignAdded' });
+                                } else {
+                                    res.json({ success: false, msg: 'error'});
+                                }
+                            });
                         } else {
-                            res.json({ success: false, msg: 'Error: ' + err });
+                            res.json({ success: false, msg: 'assignAl', node: 'code' });
                         }
-                    });
-                } else {
-                    res.json({ success: false, msg: 'You have already added the course ' + asignation.cod_course });
+                    } else {
+                        res.json({ success: false, msg: 'full' });
+                    }
+                }else {
+                    res.json({ success: false, msg: 'carneWrong', node: 'carnet' });
                 }
-            } else {
-                res.json({ success: false, msg: 'Cannot add more courses to current student.' });
-            }
-        });
+            });
+        } else {
+            res.json({ success: false, msg: 'courseWrong', node: 'code' });
+        }
     });
 };
 
@@ -67,11 +69,6 @@ asignationCTRL.deleteAsignation = async(req, res) => {
             }
         });
     });
-};
-
-asignationCTRL.addAsignation = async(req, res) => {
-    var asignation = JSON.parse(req.body);
-
 };
 
 asignationCTRL.delAsignation = async(req, res) => {

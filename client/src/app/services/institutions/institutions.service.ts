@@ -27,6 +27,12 @@ export class InstitutionsService {
     return this.http.post(this.API_URL, institution, { headers: headers });
   }
 
+  editInstitutions(id, institution){
+    this.loadToken();
+    let headers = new HttpHeaders().set('Authorization', this.authToken);
+    return this.http.put(`${this.API_URL}/${id}`, institution, { headers: headers });
+  }
+
   deleteInstitutions(id){
     this.loadToken();
     let headers = new HttpHeaders().set('Authorization', this.authToken);

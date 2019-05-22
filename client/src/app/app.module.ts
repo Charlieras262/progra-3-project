@@ -23,6 +23,13 @@ import { TeachersComponent } from './components/teachers/teachers.component';
 import { CoursesComponent } from './components/courses/courses.component';
 import { AssignmentsComponent } from './components/assignments/assignments.component';
 import { ReportsComponent } from './components/reports/reports.component';
+import { CoursesEstComponent } from './components/courses-est/courses-est.component';
+import { CoursesProfComponent } from './components/courses-prof/courses-prof.component';
+import { HomeworksEstComponent } from './components/homeworks-est/homeworks-est.component';
+import { HomeworksProfComponent } from './components/homeworks-prof/homeworks-prof.component';
+import { GradesEstComponent } from './components/grades-est/grades-est.component';
+import { GradesProfComponent } from './components/grades-prof/grades-prof.component';
+import { AdminsComponent } from './components/admins/admins.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +48,14 @@ import { ReportsComponent } from './components/reports/reports.component';
     TeachersComponent,
     CoursesComponent,
     AssignmentsComponent,
-    ReportsComponent
+    ReportsComponent,
+    CoursesEstComponent,
+    CoursesProfComponent,
+    HomeworksEstComponent,
+    HomeworksProfComponent,
+    GradesEstComponent,
+    GradesProfComponent,
+    AdminsComponent
   ],
   imports: [
     BrowserModule,

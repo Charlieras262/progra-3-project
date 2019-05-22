@@ -15,7 +15,7 @@ const Teacher = require('../models/Teacher');
  * @return {JSON} un json con un estado, un mensaje
  * y un usuario.
  */
-UserController.getProfile = async(req, res) => {
+UserController.getProfile = async (req, res) => {
     const user = await User.find();
     if (user.length === 0) res.json({ success: false, msg: 'Users not found' });
     else res.json({ success: true, msg: 'Users found', user });
@@ -27,7 +27,7 @@ UserController.getProfile = async(req, res) => {
  * @param {*} res es la respuesta que envia el servidor al front end.
  * @return {JSON} un json con un estado, un mensaje y un usuario si existe.
  */
-UserController.getUser = async(req, res) => {
+UserController.getUser = async (req, res) => {
     const id = req.params.id;
     const user = await User.findById(id);
     if (!user) res.json({ success: false, msg: 'User not found' });
@@ -41,37 +41,50 @@ UserController.getUser = async(req, res) => {
  * @param {*} res es la respuesta que envia el servidor al front end.
  * @return {JSON} un json con un estado, un mensaje.
  */
-UserController.createUser = async(req, res) => {
+UserController.createUser = async (req, res) => {
 
     var hash = bcrypt.hashSync(req.body.password, 10);
     const userModelReq = {
-        username: req.body.username,
+        username: req.body.user,
         email: req.body.email,
         password: hash,
-        valCode: req.body.valCode
+        valCode: await generalValidations.generateVerifyCode('A')
     }
-    const authRes = await authUserInfo(userModelReq);
-
+    const authRes = valEmail(userModelReq.email);
+    const addInfo = await valCode(userModelReq.valCode.toString());
     if (authRes.success) {
-        User.findOne({ email: userModelReq.email }).countDocuments(async(err, number) => {
+        User.findOne({ email: userModelReq.email }).countDocuments((err, number) => {
             if (number !== 0) {
                 res.json({ success: false, msg: 'alreadyEmail', node: 'email' });
             } else {
-                const addInfo = await valCode(userModelReq.valCode.toString());
-                if (!addInfo.success) {
-                    res.json(addInfo);
-                } else {
+                if (req.body.type === 'A') {
                     const user = new User({
-                        name: addInfo.user.name,
-                        lastname: addInfo.user.lastname,
-                        username: req.body.username,
+                        name: req.body.name,
+                        lastname: req.body.lastname,
+                        username: req.body.user,
                         email: req.body.email,
                         password: hash,
                         val_code: userModelReq.valCode,
-                        type: addInfo.user.type
+                        type: req.body.type
                     })
                     user.save();
                     res.json({ success: true, msg: 'userCreated' });
+                } else {
+                    if (!addInfo.success) {
+                        res.json(addInfo);
+                    } else {
+                        const user = new User({
+                            name: addInfo.user.name,
+                            lastname: addInfo.user.lastname,
+                            username: req.body.username,
+                            email: req.body.email,
+                            password: hash,
+                            val_code: userModelReq.valCode,
+                            type: addInfo.user.type
+                        })
+                        user.save();
+                        res.json({ success: true, msg: 'userCreated' });
+                    }
                 }
             }
         });
@@ -87,9 +100,9 @@ UserController.createUser = async(req, res) => {
  * @param {*} res es la respuesta que envia el servidor al front end.
  * @return {JSON} un json con un estado, un mensaje.
  */
-UserController.updateUser = async(req, res) => {
+UserController.updateUser = async (req, res) => {
     const user = new User(req.body);
-    const authRes = await authUserInfo(user);
+    const authRes = valEmail(user.email);;
     if (authRes.success) {
         await User.findByIdAndUpdate(req.params.id, user);
         res.json({ success: true, msg: 'User updated' });
@@ -104,7 +117,7 @@ UserController.updateUser = async(req, res) => {
  * @param {*} res es la respuesta que envia el servidor al front end.
  * @return {JSON} un json con un estado, un mensaje y un usuario si existe.
  */
-UserController.deleteUser = async(req, res) => {
+UserController.deleteUser = async (req, res) => {
     await User.findByIdAndDelete(req.params.id);
     res.json({ success: true, msg: 'User deleted' });
 };
@@ -173,38 +186,21 @@ UserController.authUserInfo = (req, res) => {
     });
 }
 
-const authUserInfo = async(user) => {
-    const names = ['Username', 'Email', 'Password', 'Request Code'];
-    // Se convierte un objeto observable a string,
-    // luego a JSON y por ultimo a un arreglo
-    var userJSON = JSON.parse(JSON.stringify(user));
-    user = Object.values(userJSON);
-    let res;
-
-    for (let i = 1; i < (names.length); i++) {
-        res = generalValidations.isFilled(user[i], names[i - 1]);
-        if (!res.success) return res;
-    }
-
-    var email = valEmail(userJSON.email);
-
-    if (!email.success) {
-        return email;
-    }
-
-    return { success: true, msg: 'Everything is clear' };
-};
-
-const valCode = async(code) => {
+const valCode = async (code) => {
     const user = { type: '', name: '', lastname: '' };
     var res = { msg: '', success: false, user: {} };
     if (code.includes('P')) {
         user.type = 'P';
-        const teacher = await Teacher.findOne({ val_code: code });
+        const teacher = await Teacher.findOne({ valCode: code });
         if (teacher) {
             user.name = teacher.name;
             user.lastname = teacher.lastName;
-            res = { msg: '', success: true, user };
+            const userFinded = await User.findOne({ val_code: code });
+            if (!userFinded) {
+                res = { msg: '', success: true, user };
+            } else {
+                res = { msg: 'codeAlreadeRegister', node: 'valCode', success: false, user };
+            }
         } else {
             res = { msg: 'valCodeWrong', success: false, node: 'valPass', user };
         }
@@ -223,6 +219,8 @@ const valCode = async(code) => {
         } else {
             res = { msg: 'valCodeWrong', success: false, node: 'valCode', user };
         }
+    } else {
+        res = { msg: 'error', success: false, user };
     }
     return res;
 }

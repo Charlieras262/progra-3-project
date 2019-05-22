@@ -66,11 +66,14 @@ export class SingupComponent implements OnInit {
               this.authService.checkIfField(data.success, 'email');
               this.authService.valFieldShow(data.success, this.translate.instant(data.msg), 'email', res);
             });
-          }
-          if(data.node == 'valCode'){
+          } else if(data.node == 'valCode'){
             this.translate.get('register.valPass').subscribe(res => {
               this.authService.checkIfField(data.success, 'valCode');
               this.authService.valFieldShow(data.success, this.translate.instant(data.msg), 'valCode', res);
+            });
+          }else{
+            this.translate.get(data.msg).subscribe(str => {
+              $.toaster(`${str}`, '<i class="fa fa-times"></i>', 'danger');
             });
           }
         }
@@ -117,7 +120,8 @@ export class SingupComponent implements OnInit {
       node.classList.remove('valid');
       node.classList.add('invalid');
       this.validations.valPass = { msg: `${this.translate.instant('student.field1')} ${fieldname} ${this.translate.instant('student.field2')}`, success: false };
-    } else if (this.password === this.valPass) {
+    }
+    if (this.password === this.valPass) {
       node.classList.remove('invalid');
       node.classList.add('valid');
       this.validations.valPass = { msg: '', success: true };

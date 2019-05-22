@@ -19,9 +19,7 @@ institutionCTRL.createInstitution = async(req, res) => {
 
 institutionCTRL.editInstitutions = async(req, res) => {
     await Institution.findByIdAndUpdate(req.params.id, req.body);
-    res.json({
-        status: 'Institution Updated'
-    });
+    res.json('instUpdated');
 }
 
 institutionCTRL.deleteInstitutions = async(req, res) => {
@@ -32,8 +30,8 @@ institutionCTRL.deleteInstitutions = async(req, res) => {
 institutionCTRL.authInstitutionInfo = (req, res) => {
     var institution = JSON.parse(req.params.id);
     var code, name;
-    code = isFilled(institution.code, "Code");
-    name = isFilled(institution.name, "Name");
+    code = isFilled(institution.code, 'Code');
+    name = isFilled(institution.name, 'Name');
     if (code.success && name.success) {
         Institution.getInstitutionbyCode(institution.code, (err, c) => {
             if (err) throw err;

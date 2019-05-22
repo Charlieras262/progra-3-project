@@ -14,8 +14,10 @@ declare var $: any;
 
 export class InstitutionsComponent implements OnInit {
 
+  _id: string;
   code: string;
   name: string;
+  btnPrimary: string;
   institutionSelected = { _id: '', code: '', name: '' }
   validations = { code: { msg: '', success: false }, name: { msg: '', success: false } };
 
@@ -25,6 +27,9 @@ export class InstitutionsComponent implements OnInit {
 
   ngOnInit() {
     this.getInstitutions();
+    this.translate.get('institution.title').subscribe(res => {
+      this.btnPrimary = res;
+    });
   }
 
   createInstitution(form: NgForm) {
@@ -36,17 +41,25 @@ export class InstitutionsComponent implements OnInit {
     });
 
     if (this.validations.code.success && this.validations.name.success) {
-      const inst = {
-        name: this.name,
-        code: this.code
-      };
-      this.institutionService.createInstitutions(inst).subscribe(res => {
-        this.translate.get(res as string).subscribe(str => {
-          $.toaster(`${str}`, '<i class="fa fa-check-circle"></i>', 'success');
+      if (!this.authService.valIfFieldIsEmpty(this._id)) {
+        const inst = {
+          name: this.name,
+          code: this.code
+        };
+        this.institutionService.createInstitutions(inst).subscribe(res => {
+          this.translate.get(res as string).subscribe(str => {
+            $.toaster(`${str}`, '<i class="fa fa-check-circle"></i>', 'success');
+            this.getInstitutions();
+            this.cleanForm(form);
+          });
+        });
+      } else {
+        this.institutionService.editInstitutions(this._id, { _id: this._id, code: this.code, name: this.name }).subscribe(res => {
+          $.toaster(`${this.translate.instant(res as string)}`, '<i class="fa fa-check-circle"></i>', 'success');
           this.getInstitutions();
           this.cleanForm(form);
         });
-      });
+      }
     } else {
       this.translate.get('code').subscribe(res => {
         this.authService.valField(this.validations.code.success, this.validations.code.msg, 'code', res);
@@ -74,11 +87,24 @@ export class InstitutionsComponent implements OnInit {
       form.reset();
       this.rmActiveClass('name');
       this.rmActiveClass('code');
+      this.flushSelectedInstitution();
+      this.translate.get('institution.title').subscribe(res => {
+        this.btnPrimary = res;
+      });
     }
   }
 
-  selectInstitution(institution) {
-    this.institutionSelected = institution;
+  selectInstitution(institution, flags) {
+    if (flags === 'D') {
+      this.institutionSelected = institution;
+    } else {
+      this._id = institution._id;
+      this.code = institution.code;
+      this.name = institution.name;
+      this.translate.get('institution.update').subscribe(res => {
+        this.btnPrimary = res;
+      });
+    }
   }
 
   deleteInstitution() {

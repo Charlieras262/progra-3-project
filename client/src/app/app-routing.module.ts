@@ -19,6 +19,13 @@ import { InstitutionsComponent } from './components/institutions/institutions.co
 import { StudentsComponent } from './components/students/students.component';
 import { TeachersComponent } from './components/teachers/teachers.component';
 import { ReportsComponent } from './components/reports/reports.component';
+import { CoursesEstComponent } from './components/courses-est/courses-est.component';
+import { HomeworksEstComponent } from './components/homeworks-est/homeworks-est.component';
+import { GradesEstComponent } from './components/grades-est/grades-est.component';
+import { AdminsComponent } from './components/admins/admins.component';
+import { CoursesProfComponent } from './components/courses-prof/courses-prof.component';
+import { HomeworksProfComponent } from './components/homeworks-prof/homeworks-prof.component';
+import { GradesProfComponent } from './components/grades-prof/grades-prof.component';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'home'},
@@ -31,11 +38,17 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate: [NoLoginGuard]},
   {path: 'singup', component: SingupComponent, canActivate: [NoLoginGuard]},
   {path: 'dashboard/0001/assignments', component: AssignmentsComponent, canActivate: [SuGuard]},
-  {path: 'dashboard/0001/courses', component: CoursesComponent, canActivate: [SuGuard]},
+  {path: 'dashboard/0001/admins', component: AdminsComponent, canActivate: [SuGuard]},
   {path: 'dashboard/0001/institutions', component: InstitutionsComponent, canActivate: [SuGuard]},
   {path: 'dashboard/0001/students', component: StudentsComponent, canActivate: [SuGuard]},
   {path: 'dashboard/0001/teachers', component: TeachersComponent, canActivate: [SuGuard]},
   {path: 'dashboard/0001/reports', component: ReportsComponent, canActivate: [SuGuard]},
+  {path: 'dashboard/1000/courses', component: CoursesEstComponent, canActivate: [UserStudentGuard]},
+  {path: 'dashboard/1000/homeworks', component: HomeworksEstComponent, canActivate: [UserStudentGuard]},
+  {path: 'dashboard/1000/ratings', component: GradesEstComponent, canActivate: [UserStudentGuard]},
+  {path: 'dashboard/0100/courses', component: CoursesProfComponent, canActivate: [UserTeacherGuard]},
+  {path: 'dashboard/0100/homeworks', component: HomeworksProfComponent, canActivate: [UserTeacherGuard]},
+  {path: 'dashboard/0100/ratings', component: GradesProfComponent, canActivate: [UserTeacherGuard]},
   {path: '**', redirectTo: 'not-found'},
   {path: 'not-found', component: NotFoundComponent}
 ];
