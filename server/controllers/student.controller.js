@@ -19,7 +19,7 @@ studentCTRL.getStudentsAmount = async(req, res) => {
 }
 
 studentCTRL.getStudent = async(req, res) => {
-    await Student.findById(req.params.id).populate('course_asigned').exec((err, course) => {
+    Student.findById(req.params.id).populate('course_asigned').exec((err, course) => {
         if (err) throw err;
         if (!course) {
             return res.json({ success: false, msg: 'Student not found' })

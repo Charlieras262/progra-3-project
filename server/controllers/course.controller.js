@@ -1,4 +1,9 @@
-const Course = require('../models/Course');
+const Course = require('../models/Course')
+const Score = require('../models/Score');
+const Pensum = require('../models/Pensum');
+const Unity = require('../models/Unity');
+const Subject = require('../models/Subject');
+const Validations = require('../controllers/validations/general.validation');
 const CourseController = {};
 
 CourseController.getCourses = async (req, res) => {
@@ -46,10 +51,35 @@ CourseController.getCourse = async (req, res) => {
 }
 
 CourseController.createCourse = async (req, res) => {
-    const course = new Course(req.body);
+    const data = req.body;
+    const course = new Course({
+        cod_inst: data.inst, 
+        name: data.name, 
+        cod_teacher: data.prof, 
+        cod_course: await Validations.generateCourseCode()
+    });
+    const score = new Score();
+    const pensum = new Pensum({name: data.name, unities: []});
+    const unitiesData= data.pensum.unities;
+    for(let i = 0; i < unitiesData.length; i++){
+        const unity = new Unity({number: unitiesData[i].number, subjects: []});
+        for(let j = 0; j < unitiesData[i].subjects.length; j++){
+            const subject = new Subject({name: unitiesData[i].subjects[j].name, content_help: unitiesData[i].subjects[j].contentHelp});
+            await subject.save()
+            unity.subjects.push(subject._id);
+        }
+        await unity.save();
+        pensum.unities.push(unity._id);
+    }
+    await pensum.save();
+    await score.save();
+    course.pensum = pensum._id;
+    course.score = score._id;
+    console.log(course);
     await course.save();
     res.json({
-        status: 'Course created'
+        msg: 'courseCreated',
+        success: true
     });
 }
 

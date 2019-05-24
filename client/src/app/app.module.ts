@@ -30,6 +30,10 @@ import { HomeworksProfComponent } from './components/homeworks-prof/homeworks-pr
 import { GradesEstComponent } from './components/grades-est/grades-est.component';
 import { GradesProfComponent } from './components/grades-prof/grades-prof.component';
 import { AdminsComponent } from './components/admins/admins.component';
+import { StatsComponent } from './components/stats/stats.component';
+import { CourseDetailsComponent } from './components/course-details/course-details.component';
+import { CourseDetailsEstComponent } from './components/course-details-est/course-details-est.component';
+import { VarDirective } from './directives/var.directive';
 
 @NgModule({
   declarations: [
@@ -55,7 +59,11 @@ import { AdminsComponent } from './components/admins/admins.component';
     HomeworksProfComponent,
     GradesEstComponent,
     GradesProfComponent,
-    AdminsComponent
+    AdminsComponent,
+    StatsComponent,
+    CourseDetailsComponent,
+    CourseDetailsEstComponent,
+    VarDirective
   ],
   imports: [
     BrowserModule,

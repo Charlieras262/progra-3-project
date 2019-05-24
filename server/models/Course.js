@@ -2,16 +2,12 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const CourseSchema = new Schema({
-    cod_career: { type: String, required: true },
-    name: { type: String, required: false },
+    cod_inst: { type: String, required: true },
+    name: { type: String, required: true },
     cod_course: { type: String, required: true },
-    cycle: { type: String, required: true },
-    section: { type: String, required: true },
-    st_time: { type: String, required: true },
-    end_time: { type: String, required: true },
-    cod_teacher: { type: String, required: false },
-    pensum: { type: Schema.ObjectId, ref: 'Pensum', required: false },
-    score: { type: Schema.ObjectId, ref: 'Score', }
+    cod_teacher: { type: String, required: true },
+    pensum: { type: Schema.ObjectId, ref: 'Pensum', required: true },
+    score: { type: Schema.ObjectId, ref: 'Score', required: true}
 });
 
 const Course = module.exports = mongoose.model('Course', CourseSchema);

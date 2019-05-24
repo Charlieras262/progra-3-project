@@ -19,10 +19,10 @@ export class CoursesService {
     return this.http.get(this.API_URL, { headers: headers });
   }
 
-  createCourse(assign){
+  createCourse(course){
     this.loadToken();
     let headers = new HttpHeaders().set('Authorization', this.authToken);
-    return this.http.post(this.API_URL, assign, { headers: headers });
+    return this.http.post(this.API_URL, course, { headers: headers });
   }
 
   deleteCourse(id){

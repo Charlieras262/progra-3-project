@@ -9,6 +9,5 @@ router.get('/:id', passport.authenticate('jwt', { session: false }), career.getA
 router.post('/', passport.authenticate('jwt', { session: false }), career.createAsignation);
 router.put('/:id', passport.authenticate('jwt', { session: false }), career.editAsignation);
 router.delete('/:id', passport.authenticate('jwt', { session: false }), career.deleteAsignation);
-router.put('/supr/:id', passport.authenticate('jwt', { session: false }), career.delAsignation);
 
 module.exports = router;

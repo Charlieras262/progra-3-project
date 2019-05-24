@@ -13,6 +13,7 @@ export class StudentService {
   authToken: any;
   user: any;
   students: any;
+  courses: any;
 
   constructor(public http: HttpClient,
     public authService: AuthenticateService) { }
@@ -20,6 +21,12 @@ export class StudentService {
   getStudentsAmount() {
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.get(`${this.API_URL}/amount`, { headers: headers });
+  }
+
+  getStudent(id){
+    this.loadToken();
+    let headers = new HttpHeaders().set('Authorization', this.authToken);
+    return this.http.get(this.API_URL+'/'+id, { headers: headers });
   }
 
   getStudents(){
@@ -53,7 +60,8 @@ export class StudentService {
 
   loadUser() {
     const user = localStorage.getItem('user');
-    this.user = user;
+    this.user = JSON.parse(user);
+    return this.user;
   }
 
 }

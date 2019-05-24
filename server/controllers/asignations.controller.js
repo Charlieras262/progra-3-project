@@ -57,22 +57,18 @@ asignationCTRL.editAsignation = async(req, res) => {
 };
 
 asignationCTRL.deleteAsignation = async(req, res) => {
-    var asignation = JSON.parse(req.body);
+    var asignation = await Asignation.findById(req.params.id);
     await Asignation.findByIdAndDelete(req.params.id);
-    await Course.getCoursebyCode(asignation.cod_course, (err, course) => {
+    Course.getCoursebyCode(asignation.cod_course, (err, course) => {
         if (err) throw err;
-        Student.findOneAndUpdate({ carne: asignation.carne_stud }, { $pull: { course_asigned: course._id } }, (err, student) => {
+        Student.findOneAndUpdate({ _id: asignation.carne_stud }, { $pull: { course_asigned: course._id } }, (err, student) => {
             if (student) {
-                res.json({ success: true, msg: 'Asignation Deleted Successfuly' });
+                res.json({ success: true, msg: 'assignDeleted' });
             } else {
-                res.json({ success: true, msg: 'Error: ' + err });
+                res.json({ success: false, msg: 'Error: ' + err });
             }
         });
     });
-};
-
-asignationCTRL.delAsignation = async(req, res) => {
-    var asignation = JSON.parse(req.params.id);
 };
 
 module.exports = asignationCTRL;

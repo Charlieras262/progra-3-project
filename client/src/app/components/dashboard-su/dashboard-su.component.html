@@ -1,6 +1,7 @@
 <div class="container-100">
     <div class="wrap-100">
-        <p class="title">{{'dashboard_su.title1' | translate}} <span class="text-info">{{'dashboard_su.title2' | translate}}</span></p>
+        <p class="title">{{'dashboard_su.title1' | translate}} <span
+                class="text-info">{{'dashboard_su.title2' | translate}}</span></p>
         <div>
             <div class="row">
                 <div class="col-md-4 mb-2 mt-4 op" [routerLink]="['institutions']">
@@ -55,6 +56,18 @@
                         </div>
                     </div>
                 </div>
+                <div class=" col-md-4  mb-2 mt-4 op" [routerLink]="['courses']">
+                    <div class="inforide">
+                        <div class="ride">
+                            <img src="public/images/cour.png">
+                        </div>
+                        <div class="fontsty">
+                            <h4>{{'dashboard_su.course' | translate}}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="center">
                 <div class=" col-md-4  mb-2 mt-4 op" [routerLink]="['reports']">
                     <div class="inforide">
                         <div class="ride">

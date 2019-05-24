@@ -48,23 +48,24 @@ UserController.createUser = async (req, res) => {
         username: req.body.user,
         email: req.body.email,
         password: hash,
-        valCode: await generalValidations.generateVerifyCode('A')
+        valCode: req.body.valCode
     }
+    const adminValCode = await generalValidations.generateVerifyCode('A');
     const authRes = valEmail(userModelReq.email);
-    const addInfo = await valCode(userModelReq.valCode.toString());
+    if(userModelReq.valCode) var addInfo = await valCode(userModelReq.valCode.toString());
     if (authRes.success) {
         User.findOne({ email: userModelReq.email }).countDocuments((err, number) => {
             if (number !== 0) {
                 res.json({ success: false, msg: 'alreadyEmail', node: 'email' });
             } else {
-                if (req.body.type === 'A') {
+                if (req.body.type) {
                     const user = new User({
                         name: req.body.name,
                         lastname: req.body.lastname,
                         username: req.body.user,
                         email: req.body.email,
                         password: hash,
-                        val_code: userModelReq.valCode,
+                        val_code: adminValCode,
                         type: req.body.type
                     })
                     user.save();
@@ -80,7 +81,8 @@ UserController.createUser = async (req, res) => {
                             email: req.body.email,
                             password: hash,
                             val_code: userModelReq.valCode,
-                            type: addInfo.user.type
+                            type: addInfo.user.type,
+                            user_type_id: addInfo.user.user_type_id
                         })
                         user.save();
                         res.json({ success: true, msg: 'userCreated' });
@@ -165,6 +167,8 @@ UserController.authUserInfo = (req, res) => {
                 const token = jwt.sign(user.toJSON(), config.secret, {
                     expiresIn: 604800 // 1 week
                 });
+
+
                 res.json({
                     success: true,
                     msg: 'Login success',
@@ -172,7 +176,8 @@ UserController.authUserInfo = (req, res) => {
                     user: {
                         username: userJSON.username,
                         email: userJSON.email,
-                        type: userJSON.type
+                        type: userJSON.type,
+                        code: userJSON.user_type_id
                     }
                 });
             } else {
@@ -187,7 +192,7 @@ UserController.authUserInfo = (req, res) => {
 }
 
 const valCode = async (code) => {
-    const user = { type: '', name: '', lastname: '' };
+    const user = { type: '', name: '', lastname: '' , user_type_id: ''};
     var res = { msg: '', success: false, user: {} };
     if (code.includes('P')) {
         user.type = 'P';
@@ -195,6 +200,7 @@ const valCode = async (code) => {
         if (teacher) {
             user.name = teacher.name;
             user.lastname = teacher.lastName;
+            user.user_type_id = teacher._id;
             const userFinded = await User.findOne({ val_code: code });
             if (!userFinded) {
                 res = { msg: '', success: true, user };
@@ -210,6 +216,7 @@ const valCode = async (code) => {
         if (student) {
             user.name = student.name;
             user.lastname = student.lastName;
+            user.user_type_id = student._id;
             const userFinded = await User.findOne({ val_code: code });
             if (!userFinded) {
                 res = { msg: '', success: true, user };

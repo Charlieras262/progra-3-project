@@ -1,9 +1,9 @@
 //Require the dependencies
+const methodOverride = require('method-override');
 const express = require('express')
 const morgan = require('morgan');
 const database = require('./database');
 const passport = require('passport');
-const methodOverride = require('method-override');
 const cors = require('cors');
 const path = require('path');
 
@@ -17,11 +17,11 @@ app.set("port", process.env.PORT || 8080)
 database()
 
 //Middlerwares
+app.use(methodOverride('_method'));
 app.use(morgan('dev'))
 app.use(express.json())
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(methodOverride('_method'));
 app.use(cors({ origin: 'http://localhost:4200' }));
 
 require('./controllers/validations/passport')(passport);

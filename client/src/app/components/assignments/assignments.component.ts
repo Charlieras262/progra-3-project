@@ -5,6 +5,8 @@ import { AuthenticateService } from 'src/app/services/authenticate/authenticate.
 import { TranslateService } from '@ngx-translate/core';
 import { StudentService } from 'src/app/services/students/student.service';
 import { CoursesService } from 'src/app/services/courses/courses.service';
+import { ProjectVariable } from 'src/app/variables/projects.variables';
+import * as io from 'socket.io-client';
 
 declare var $: any;
 
@@ -15,6 +17,7 @@ declare var $: any;
 })
 export class AssignmentsComponent implements OnInit {
 
+  socket: any;
   assignSelected = {_id: '', carne_stud: '' ,cod_course: '' , section: '' }
   validations = {carnet: {msg: '', success: false}, code: {msg: '', success: false}, section: {msg: '', success: false}}
   _id: string;
@@ -29,6 +32,7 @@ export class AssignmentsComponent implements OnInit {
     public coursesService: CoursesService) { }
 
   ngOnInit() {
+    this.socket = io(ProjectVariable.serverLocation);
     this.getAssigns();
     this.getStudents();
     this.getCourses();
@@ -38,15 +42,15 @@ export class AssignmentsComponent implements OnInit {
 
   getStudents() {
     this.studentService.getStudents().
-      subscribe(res => {
-        this.studentService.students = res;
+      subscribe(students => {
+        this.studentService.students = students;
       });
   }
 
   getCourses() {
     this.coursesService.getCourses().
-      subscribe(res => {
-        this.coursesService.courses = res;
+      subscribe(courses => {
+        this.coursesService.courses = courses;
       });
   }
 
@@ -72,6 +76,7 @@ export class AssignmentsComponent implements OnInit {
         if(data.success){
           this.translate.get(data.msg).subscribe(str => {
             $.toaster(`${str}`, '<i class="fa fa-check-circle"></i>', 'success');
+            this.socket.emit('getCourse');
             this.cleanForm(form);
             this.getAssigns();
           });
@@ -136,8 +141,10 @@ export class AssignmentsComponent implements OnInit {
   deleteAssign() {
     this.assignService.deleteAssign(this.assignSelected._id)
       .subscribe(res => {
-        this.translate.get(res as string).subscribe(str => {
+        const data = JSON.parse(JSON.stringify(res));
+        this.translate.get(data.msg).subscribe(str => {
           $.toaster(str, '<i class="fa fa-check-circle"></i>', 'success');
+          this.socket.emit('getCourse');
           this.getAssigns();
           this.flushSelectedAssign();
         });

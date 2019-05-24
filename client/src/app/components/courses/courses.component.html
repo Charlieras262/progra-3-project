@@ -1,3 +1,115 @@
-<p>
-  courses works!
-</p>
+<div class="limiter">
+  <div class="container-login">
+    <form class="wrap-login" #coursesForm="ngForm" (ngSubmit)="createAssign(coursesForm)">
+      <div class="login-pic" data-tilt>
+        <img src="public/images/inst.png" alt="IMG">
+      </div>
+      <div class="mt-2 col-md-7">
+        <h2 class="text-info mb-5 text-center brand">{{'courses.title' | translate}}</h2>
+        <div class="form-group" id="inst" data-toggle="popover">
+          <select class="custom-select" id="codeInstSelect">
+            <option selected="">{{'courses.inst' | translate}}</option>
+            <option value="{{institution._id}}" *ngFor="let institution of institutionService.institutions">
+              {{institution.code}} -
+              {{institution.name}} {{institution.lastName}}
+            </option>
+          </select>
+        </div>
+        <div class="form-group" id="prof" data-toggle="popover">
+          <select class="custom-select" id="codeProfSelect">
+            <option selected="">{{'courses.prof' | translate}}</option>
+            <option value="{{course._id}}" *ngFor="let course of teacherService.teachers">{{course._id}} -
+              {{course.name}} {{course.lastName}}
+            </option>
+          </select>
+        </div>
+        <div id="name" class="form-group wrap-input">
+          <input type="text" name="name" class="form-control input" placeholder="{{'courses.name' | translate}}"
+            [(ngModel)]="name">
+          <span class="focus-input"></span>
+          <span class="symbol-input">
+            <i class="fa fa-address-card" aria-hidden="true"></i>
+          </span>
+          <span class="input-valid">
+            <i class="fa fa-check" aria-hidden="true"></i>
+          </span>
+          <span class="input-invalid shake">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </span>
+        </div>
+      </div>
+      <!--Contenido del Curso-->
+      <div class="mt-3" id="pensum">
+        <h2 class="text-info mb-4 text-left brand">{{'courses.unity' | translate}}</h2>
+        <!--Unity Begins-->
+        <div class="" id="unities">
+          <div class="" id="unity1" *ngVar="unities[0].number as number">
+            <!--Content Begins-->
+            <p class="text-white text-left brand">{{'courses.uni' | translate}} {{number}}</p>
+            <div class="ml-5" id="contents">
+              <p class="text-info text-left brand">{{'courses.content' | translate}}</p>
+              <div class="mt-3" id="content1" name="content">
+                <div class="wrap-input-inline">
+                  <div id="title11" class="form-group wrap-input">
+                    <input type="name" name="title" class="form-control input"
+                      placeholder="{{'courses.contentTitle' | translate}}" [(ngModel)]="unities[0].subjects[0].name"
+                      value="{{unities[0].subjects[0].name}}">
+                    <span class="focus-input"></span>
+                    <span class="symbol-input">
+                      <i class="fa fa-book" aria-hidden="true"></i>
+                    </span>
+                    <span class="input-valid">
+                      <i class="fa fa-check" aria-hidden="true"></i>
+                    </span>
+                    <span class="input-invalid shake">
+                      <i class="fa fa-times" aria-hidden="true"></i>
+                    </span>
+                  </div>
+                  <div id="help11" class="form-group wrap-input">
+                    <input type="name" name="help" class="form-control input"
+                      placeholder="{{'courses.contentHelp' | translate}}"
+                      [(ngModel)]="unities[0].subjects[0].contentHelp" value="{{unities[0].subjects[0].contentHelp}}">
+                    <span class="focus-input"></span>
+                    <span class="symbol-input">
+                      <i class="fa fa-at" aria-hidden="true"></i>
+                    </span>
+                    <span class="input-valid">
+                      <i class="fa fa-check" aria-hidden="true"></i>
+                    </span>
+                    <span class="input-invalid shake">
+                      <i class="fa fa-times" aria-hidden="true"></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button class="btn-add mb-2 ml-5" type="button" (click)="addContent(number)"><i
+                class="fa fa-plus "></i><span>{{'courses.addCont' | translate}}</span></button>
+            <!--Content Ends-->
+          </div>
+        </div>
+        <button class="btn-add mb-4" type="button" (click)="addUnity()"><i
+            class="fa fa-plus "></i><span>{{'courses.addUnity' | translate}}</span></button>
+        <!--Unity Ends-->
+      </div>
+      <div class="wrap-btn-inline">
+        <button class="btn btn-info col-md-6" type="submit">{{'courses.title' | translate}}</button>
+        <button class="btn btn-dark col-md-6" type="button"
+          (click)="cleanForm()">{{'courses.cancel' | translate}}</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<template id="unityTemplate">
+  <div class="" id="unity{{n}}" *ngVar="n as number">
+    <p class="text-white text-left brand">{{'courses.uni' | translate}} {{number}}</p>
+    <div class="ml-5" id="contents mt-4">
+      <p class="text-info mb-4 text-left brand">{{'courses.content' | translate}}</p>
+
+    </div>
+    <input hidden id="n{{number}}" type="text" value="{{number}}">
+    <button id="btn{{number}}" class="btn-add mb-2 ml-5" type="button"><i
+        class="fa fa-plus "></i><span>{{'courses.addCont' | translate}}</span></button>
+  </div>
+</template>

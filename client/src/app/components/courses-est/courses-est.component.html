@@ -1,3 +1,24 @@
-<p>
-  courses-est works!
-</p>
+<div class="container-100">
+  <div class="wrap-100">
+    <p class="title">{{'dashboard_su.title1' | translate}}
+      <span class="text-info">{{'dashboard_su.title2' | translate}}</span>
+    </p>
+    <div>
+      <div class="row">
+        <div class="col-md-4 mb-2 mt-4 op" *ngFor="let course of studentService.courses" [routerLink]="[course.name]">
+          <div class="inforide">
+            <div class="ride">
+              <img src="public/images/cour.png">
+            </div>
+            <div class="fontsty">
+              <h4>{{course.name}}</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+
+      </div>
+    </div>
+  </div>
+</div>

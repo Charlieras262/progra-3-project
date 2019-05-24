@@ -1,6 +1,11 @@
+const Student = require('../models/Student');
+
 let users = {}
 module.exports = (io) => {
     io.on('connection', (socket) => {
+        socket.on('getCourse', () => {
+            io.sockets.emit('getCourse');
+        });
         socket.on('connected', data => {
             socket.nickname = data;
             io.sockets.emit('getUsername', data);
