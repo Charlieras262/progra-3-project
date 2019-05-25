@@ -1,0 +1,140 @@
+.inforide {
+    background-color: #131317;
+    border-radius: 8px;
+    height: 175px;
+    position: relative;
+}
+
+.ride img {
+    margin-top: 5px;
+    width: 40%;
+}
+
+.op:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.op:active {
+    transform: scale(0.9);
+    border-color: transparent;
+}
+
+.op:focus {
+    outline: 0px;
+}
+
+.ride {
+    position: relative;
+    background-color: #cb3234;
+    pshowing-top: 15px;
+    border-radius: 8px 8px 0px 0px;
+    text-align: center;
+    height: 50%;
+}
+
+.fontsty {
+    position: relative;
+    text-align: center;
+}
+
+.fontsty h4 {
+    color: #6E6E6E;
+    font-family: Poppins-Bold;
+    font-size: 15px;
+    margin-top: 45px;
+}
+
+.wrap-btn {
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    pshowing-bottom: 10px;
+}
+
+.container-100 {
+    width: 100%;
+    min-height: 100vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    pshowing: 15px;
+}
+
+.wrap-100 {
+    width: 1000px;
+    background: #0d0e12;
+    border-radius: 10px;
+    overflow: hidden;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    flex-wrap: wrap;
+    text-align: left;
+    padding: 50px 90px 50px 90px;
+}
+
+.title {
+    font-family: Poppins-Bold;
+    font-size: 40px;
+    width: 100%;
+    display: block;
+}
+
+.sub-title {
+    font-family: Poppins-Bold;
+    font-size: 20px;
+    color: #941e25;
+    width: 100%;
+    display: block;
+}
+
+.content {
+    font-family: Poppins-Regular;
+    font-size: 15px;
+    width: 100%;
+    display: block;
+}
+
+.btn-show{
+    outline: none;
+    width: 50px;
+    height: 50px;
+    border-color: transparent;
+    background-color: #cb3234;
+    color: #fff;
+    border-radius: 25px;
+    transition: all 0.3s;
+}
+
+.btn-show span{
+    font-size: 0px;
+    display: block;
+    transition: all 0.3s;
+}
+
+.btn-show:active{
+    border-color: transparent;
+    box-shadow: transparent;
+    border: 0;
+    transform: scale(0.9)
+}
+
+.btn-show:hover{
+    background-color: #941e25;
+    width: 200px;
+}
+
+.btn-show:hover span{
+    font-size: 12px;
+}

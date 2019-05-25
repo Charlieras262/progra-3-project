@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import { AuthenticateService } from 'src/app/services/authenticate/authenticate.service';
 import { StudentService } from 'src/app/services/students/student.service';
 import { TeacherService } from 'src/app/services/teacher/teacher.service';
+import { InstitutionsService } from 'src/app/services/institutions/institutions.service';
+import { CoursesService } from 'src/app/services/courses/courses.service';
+import { ProjectVariable } from 'src/app/variables/projects.variables';
+import * as io from 'socket.io-client';
 
 declare var $: any;
 
@@ -13,18 +16,21 @@ declare var $: any;
 })
 export class HomeComponent implements OnInit {
 
+  socket: any;
   students = 0
   teachers = 0
   institutions = 0
   courses = 0
 
-  constructor(public authService: AuthenticateService, 
+  constructor(public authService: AuthenticateService,
     public servicioEstudiantes: StudentService,
-    public teacherService: TeacherService) { }
+    public teacherService: TeacherService,
+    public instService: InstitutionsService,
+    public coursesService: CoursesService) { }
 
   ngOnInit() {
-    this.getStudentsAmount();
-    this.getTeachersAmount();
+    this.socket = io(ProjectVariable.serverLocation);
+    this.updateHomeInfo();
   }
 
   getRoute() {
@@ -47,6 +53,16 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  updateHomeInfo() {
+    this.socket.on('updateHome', () => {
+      this.getStudentsAmount();
+      this.getTeachersAmount();
+      this.getCoursesAmount();
+      this.getInstitutionsAmount();
+    });
+    this.socket.emit('updateHome');
+  }
+
   getStudentsAmount() {
     this.servicioEstudiantes.getStudentsAmount().subscribe(res => {
       this.students = res as number;
@@ -56,6 +72,18 @@ export class HomeComponent implements OnInit {
   getTeachersAmount() {
     this.teacherService.getTeachersAmount().subscribe(res => {
       this.teachers = res as number;
+    });
+  }
+
+  getCoursesAmount() {
+    this.coursesService.getCoursesAmount().subscribe(res => {
+      this.courses = res as number;
+    });
+  }
+
+  getInstitutionsAmount() {
+    this.instService.getInstitutionsAmount().subscribe(res => {
+      this.institutions = res as number;
     });
   }
 }

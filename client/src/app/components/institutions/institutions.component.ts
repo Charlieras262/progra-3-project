@@ -3,6 +3,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { InstitutionsService } from 'src/app/services/institutions/institutions.service';
 import { NgForm } from '@angular/forms';
 import { AuthenticateService } from 'src/app/services/authenticate/authenticate.service';
+import { ProjectVariable } from 'src/app/variables/projects.variables';
+import * as io from 'socket.io-client';
 
 declare var $: any;
 
@@ -14,6 +16,7 @@ declare var $: any;
 
 export class InstitutionsComponent implements OnInit {
 
+  socket: any
   _id: string;
   code: string;
   name: string;
@@ -26,6 +29,7 @@ export class InstitutionsComponent implements OnInit {
     public authService: AuthenticateService) { }
 
   ngOnInit() {
+    this.socket = io(ProjectVariable.serverLocation);
     this.getInstitutions();
     this.translate.get('institution.title').subscribe(res => {
       this.btnPrimary = res;
@@ -51,6 +55,7 @@ export class InstitutionsComponent implements OnInit {
             $.toaster(`${str}`, '<i class="fa fa-check-circle"></i>', 'success');
             this.getInstitutions();
             this.cleanForm(form);
+            this.socket.emit('updateHome');
           });
         });
       } else {

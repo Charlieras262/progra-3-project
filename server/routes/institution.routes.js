@@ -4,6 +4,7 @@ const router = express.Router();
 
 const institution = require('../controllers/institution.controller');
 
+router.get('/amount', institution.getInstitutionsAmount);
 router.get('/', passport.authenticate('jwt', { session: false }), institution.getInstitutions);
 router.get('/:id', passport.authenticate('jwt', { session: false }), institution.getInstitution);
 router.post('/', passport.authenticate('jwt', { session: false }), institution.createInstitution);

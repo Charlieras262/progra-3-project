@@ -1,6 +1,11 @@
 const Institution = require('../models/Institution');
 const institutionCTRL = {};
 
+institutionCTRL.getInstitutionsAmount = async(req, res) => {
+    const institution = await Institution.find().countDocuments();
+    res.json(institution);
+}
+
 institutionCTRL.getInstitutions = async(req, res) => {
     const institution = await Institution.find();
     res.json(institution);

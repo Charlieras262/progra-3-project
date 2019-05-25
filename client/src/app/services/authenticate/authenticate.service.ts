@@ -166,6 +166,7 @@ export class AuthenticateService {
   loadUser() {
     const user = localStorage.getItem('user');
     this.user = user;
+    return JSON.parse(user);
   }
 
   loggedIn() {

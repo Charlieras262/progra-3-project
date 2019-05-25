@@ -21,6 +21,11 @@ export class InstitutionsService {
     return this.http.get(this.API_URL, { headers: headers });
   }
 
+  getInstitutionsAmount(){
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get(`${this.API_URL}/amount`, { headers: headers });
+  }
+
   createInstitutions(institution){
     this.loadToken();
     let headers = new HttpHeaders().set('Authorization', this.authToken);

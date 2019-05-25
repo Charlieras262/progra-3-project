@@ -4,6 +4,8 @@ import { StudentService } from 'src/app/services/students/student.service';
 import { AuthenticateService } from 'src/app/services/authenticate/authenticate.service';
 import { NgForm } from '@angular/forms';
 import { InstitutionsService } from 'src/app/services/institutions/institutions.service';
+import { ProjectVariable } from 'src/app/variables/projects.variables';
+import * as io from 'socket.io-client';
 
 declare var $: any;
 
@@ -14,6 +16,7 @@ declare var $: any;
 })
 export class StudentsComponent implements OnInit {
 
+  socket: any;
   inst: string;
   name: string;
   lastname: string;
@@ -28,6 +31,7 @@ export class StudentsComponent implements OnInit {
     public instService: InstitutionsService) { }
 
   ngOnInit() {
+    this.socket = io(ProjectVariable.serverLocation);
     this.getStudents();
     this.getInstitutions();
     this.selectInst();
@@ -86,6 +90,7 @@ export class StudentsComponent implements OnInit {
         });
         this.getStudents();
         this.cleanForm(form);
+        this.socket.emit('updateHome');
       });
     } else {
       this.translate.get('inst').subscribe(res => {

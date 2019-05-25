@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 const controller = require('../controllers/course.controller');
 
+router.get('/amount', controller.getCoursesAmount);
 // Obtener Cursos
 router.get('/', passport.authenticate('jwt', { session: false }), controller.getCourses);
 // Obtener Curso por id
