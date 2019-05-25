@@ -13,7 +13,7 @@ export class StudentService {
   authToken: any;
   user: any;
   students: any;
-  courses: any;
+  courses = [];
 
   constructor(public http: HttpClient,
     public authService: AuthenticateService) { }

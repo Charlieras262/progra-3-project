@@ -19,6 +19,17 @@ export class CoursesService {
     return this.http.get(this.API_URL, { headers: headers });
   }
 
+  getCoursesAmount(){
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get(`${this.API_URL}/amount`, { headers: headers });
+  }
+
+  getCourse(id){
+    this.loadToken();
+    let headers = new HttpHeaders().set('Authorization', this.authToken);
+    return this.http.get(this.API_URL+'/'+id, { headers: headers });
+  }
+
   createCourse(course){
     this.loadToken();
     let headers = new HttpHeaders().set('Authorization', this.authToken);

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StudentService } from 'src/app/services/students/student.service';
 
 @Component({
   selector: 'app-dashboard-est',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardEstComponent implements OnInit {
 
-  constructor() { }
+  id: any;
+  constructor(public studentService: StudentService) { }
 
   ngOnInit() {
+    const user = this.studentService.loadUser();
+    this.id = user.code;
   }
 
 }

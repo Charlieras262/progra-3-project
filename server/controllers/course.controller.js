@@ -4,7 +4,11 @@ const Pensum = require('../models/Pensum');
 const Unity = require('../models/Unity');
 const Subject = require('../models/Subject');
 const Validations = require('../controllers/validations/general.validation');
-const CourseController = {};
+const CourseController = {}
+
+CourseController.getCoursesAmount = async (req, res) => {
+    res.json(await Course.find().countDocuments());
+}
 
 CourseController.getCourses = async (req, res) => {
     await Course.find().populate({
@@ -22,7 +26,13 @@ CourseController.getCourses = async (req, res) => {
         } else {
             Course.populate(course, {path: 'score'}, (err, score) => {
                 if (err) throw err;
-                res.json(course);
+                Course.populate(score, {path: 'cod_teacher'}, (err, teacher) => {
+                    if (err) throw err;
+                    Course.populate(teacher, {path: 'cod_inst'}, (err, inst) => {
+                        if (err) throw err;
+                        res.json(inst);
+                    })
+                })
             });
         }
     });
@@ -44,7 +54,10 @@ CourseController.getCourse = async (req, res) => {
         } else {
             Course.populate(course, {path: 'score'}, (err, score) => {
                 if (err) throw err;
-                res.json(course);
+                Course.populate(score, {path: 'cod_teacher'}, (err, teacher) => {
+                    if (err) throw err;
+                    res.json(teacher);
+                })
             });
         }
     });

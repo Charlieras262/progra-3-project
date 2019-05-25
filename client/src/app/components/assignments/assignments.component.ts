@@ -77,6 +77,7 @@ export class AssignmentsComponent implements OnInit {
           this.translate.get(data.msg).subscribe(str => {
             $.toaster(`${str}`, '<i class="fa fa-check-circle"></i>', 'success');
             this.socket.emit('getCourse');
+            this.socket.emit('updateHome');
             this.cleanForm(form);
             this.getAssigns();
           });

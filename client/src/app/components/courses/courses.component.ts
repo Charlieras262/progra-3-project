@@ -5,6 +5,9 @@ import { NgForm } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthenticateService } from 'src/app/services/authenticate/authenticate.service';
 import { CoursesService } from 'src/app/services/courses/courses.service';
+import { ProjectVariable } from 'src/app/variables/projects.variables';
+import * as io from 'socket.io-client';
+import { Router } from '@angular/router';
 
 declare var jQuery: any;
 declare var $: any;
@@ -16,6 +19,7 @@ declare var $: any;
 })
 export class CoursesComponent implements OnInit {
   
+  socket: any
   n = 2;
   unities = [
     {
@@ -37,9 +41,11 @@ export class CoursesComponent implements OnInit {
     public teacherService: TeacherService,
     public translate: TranslateService,
     public authService: AuthenticateService,
-    public courseService: CoursesService) { }
+    public courseService: CoursesService,
+    public router: Router) { }
 
   ngOnInit() {
+    this.socket = io(ProjectVariable.serverLocation);
     this.getInstitutions();
     this.getTeachers();
     this.selectInst();
@@ -92,7 +98,15 @@ export class CoursesComponent implements OnInit {
             $.toaster(`${str}`, '<i class="fa fa-times"></i>', 'danger');
           });
         }
-        window.location.reload();
+        this.socket.emit('updateHome');
+        const user = this.authService.loadUser();
+        if(user.type === 'A'){
+          this.router.navigate(['/dashboard/0010']);
+        } else if (user.type === 'S'){
+          this.router.navigate(['/dashboard/0001']);
+        } else {
+          this.router.navigate(['/home']);
+        }
       });
     } else {
       this.translate.get('courses.name').subscribe(res => {

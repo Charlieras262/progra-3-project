@@ -1,3 +1,72 @@
-<p>
-  reports works!
-</p>
+<div class="container-100">
+    <div class="wrap-100">
+        <p class="title">{{'reports.title1' | translate}} <span
+                class="text-info">{{'reports.title2' | translate}}</span></p>
+        <div>
+            <div class="row">
+                <div class="col-md-4 mb-2 mt-4 op">
+                    <div class="inforide">
+                        <div class="ride">
+                            <img src="public/images/inst.png">
+                        </div>
+                        <div class="fontsty">
+                            <h4>{{'dashboard_su.inst' | translate}}</h4>
+                        </div>
+                    </div>
+                    <button class="btn-download" type="button" (click)="generateInst()"><i
+                      class="fa fa-arrow-down"></i></button>
+                </div>
+                <div class=" col-md-4  mb-2 mt-4 op">
+                    <div class="inforide">
+                        <div class="ride">
+                            <img src="public/images/stud.png">
+                        </div>
+                        <div class="fontsty">
+                            <h4>{{'dashboard_su.stu' | translate}}</h4>
+                        </div>
+                    </div>
+                    <button class="btn-download" type="button" (click)="generateStudent()"><i
+                      class="fa fa-arrow-down"></i></button>
+                </div>
+                <div class=" col-md-4  mb-2 mt-4 op">
+                    <div class="inforide">
+                        <div class="ride">
+                            <img src="public/images/prof.png">
+                        </div>
+                        <div class="fontsty">
+                            <h4>{{'dashboard_su.prof' | translate}}</h4>
+                        </div>
+                    </div>
+                    <button class="btn-download" type="button" (click)="generateTeacher()"><i
+                      class="fa fa-arrow-down"></i></button>
+                </div>
+            </div>
+            <div class="center">
+                <div class=" col-md-4  mb-2 mt-4 op">
+                    <div class="inforide">
+                        <div class="ride">
+                            <img src="public/images/asig.png">
+                        </div>
+                        <div class="fontsty">
+                            <h4>{{'dashboard_su.assign' | translate}}</h4>
+                        </div>
+                    </div>
+                    <button class="btn-download" type="button" (click)="generateAsignation()"><i
+                      class="fa fa-arrow-down"></i></button>
+                </div>
+                <div class=" col-md-4  mb-2 mt-4 op">
+                    <div class="inforide">
+                        <div class="ride">
+                            <img src="public/images/cour.png">
+                        </div>
+                        <div class="fontsty">
+                            <h4>{{'dashboard_su.course' | translate}}</h4>
+                        </div>
+                    </div>
+                    <button class="btn-download" type="button" (click)="generateCourse()"><i
+                      class="fa fa-arrow-down"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

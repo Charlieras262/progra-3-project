@@ -3,6 +3,8 @@ import { TeacherService } from 'src/app/services/teacher/teacher.service';
 import { NgForm } from '@angular/forms';
 import { AuthenticateService } from 'src/app/services/authenticate/authenticate.service';
 import { TranslateService } from '@ngx-translate/core';
+import { ProjectVariable } from 'src/app/variables/projects.variables';
+import * as io from 'socket.io-client';
 
 declare var $: any;
 
@@ -13,6 +15,7 @@ declare var $: any;
 })
 export class TeachersComponent implements OnInit {
 
+  socket: any;
   teacherSelected = { _id: '', name: '', lastName: '', fnac: '', cui: '', esp: '' }
   validations = { name: { msg: '', success: false }, lastname: { msg: '', success: false }, fnac: { msg: '', success: false }, cui: { msg: '', success: false }, esp: { msg: '', success: false } }
   _id: string;
@@ -27,6 +30,7 @@ export class TeachersComponent implements OnInit {
     public translate: TranslateService) { }
 
   ngOnInit() {
+    this.socket = io(ProjectVariable.serverLocation);
     this.getTeachers();
   }
 
@@ -62,6 +66,7 @@ export class TeachersComponent implements OnInit {
             $.toaster(`${str}`, '<i class="fa fa-check-circle"></i>', 'success');
             this.cleanForm(form);
             this.getTeachers();
+            this.socket.emit('updateHome');
           });
         } else {
           this.translate.get(data.msg).subscribe(str => {

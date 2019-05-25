@@ -6,6 +6,9 @@ module.exports = (io) => {
         socket.on('getCourse', () => {
             io.sockets.emit('getCourse');
         });
+        socket.on('updateHome', () => {
+            io.sockets.emit('updateHome');
+        });
         socket.on('connected', data => {
             socket.nickname = data;
             io.sockets.emit('getUsername', data);

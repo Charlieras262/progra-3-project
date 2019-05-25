@@ -1,11 +1,24 @@
 <div class="container-100">
   <div class="wrap-100">
-    <p class="title">{{'dashboard_su.title1' | translate}}
-      <span class="text-info">{{'dashboard_su.title2' | translate}}</span>
+    <p class="title">{{'courses.assign1' | translate}}
+      <span class="text-info">{{'courses.assign2' | translate}}</span>
     </p>
     <div>
+      <div *ngIf="loading" class="container">
+        <div class="mt-4">
+          <div class="loading first">
+            <div class="loading second">
+              <div class="loading third"></div>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-2">
+          <p class="content">{{'courses.load' | translate}}</p>
+        </div>
+      </div>
+      <p *ngIf="!thereAreCourses" class="title">{{'courses.noCourses' | translate}}</p>
       <div class="row">
-        <div class="col-md-4 mb-2 mt-4 op" *ngFor="let course of studentService.courses" [routerLink]="[course.name]">
+        <div class="col-md-4 mb-2 mt-4 op" *ngFor="let course of studentService.courses" [routerLink]="[course._id]">
           <div class="inforide">
             <div class="ride">
               <img src="public/images/cour.png">
@@ -15,9 +28,6 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="row">
-
       </div>
     </div>
   </div>

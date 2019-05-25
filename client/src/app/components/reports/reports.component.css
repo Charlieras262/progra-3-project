@@ -1,0 +1,138 @@
+.inforide {
+    background-color: #941e25;
+    border-radius: 8px;
+    height: 175px;
+    position: relative;
+    padding: -1px -1px -1px -1px;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+.ride img {
+    margin-top: 5px;
+    width: 40%;
+}
+
+.op{
+    position: relative;
+}
+
+.op:focus {
+    outline: 0px;
+}
+
+.ride {
+    position: relative;
+    background-color: #131317;
+    padding-top: 15px;
+    border-radius: 8px 8px 0px 0px;
+    text-align: center;
+    height: 50%;
+}
+
+.fontsty {
+    position: relative;
+    text-align: center;
+}
+
+.fontsty h4 {
+    color: #ddd;
+    font-family: Poppins-Bold;
+    font-size: 15px;
+    margin-top: 45px;
+}
+
+.wrap-btn {
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 10px;
+}
+
+.container-100 {
+    width: 100%;
+    min-height: 100vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+.wrap-100 {
+    width: 1000px;
+    background: #0d0e12;
+    border-radius: 10px;
+    overflow: hidden;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    flex-wrap: wrap;
+    text-align: center;
+    padding: 50px 90px 50px 90px;
+}
+
+.title {
+    font-family: Poppins-Bold;
+    font-size: 40px;
+    color: #333333;
+    text-align: center;
+    width: 100%;
+    display: block;
+}
+
+
+.btn-download{
+    outline: none;
+    width: 50px;
+    height: 50px;
+    border-color: transparent;
+    background-color: #141418;
+    border-radius: 25px;
+    transition: all 0.3s;
+    position: absolute;
+    right: -5px;
+    bottom: -20px;
+    opacity: 0;
+    transform: scale(0)
+}
+
+.btn-download i{
+    color: #cb3234;
+    font-size: 0px;
+    transform: scale(0);
+    transition: all 0.3s;
+}
+
+.op:hover .btn-download:active{
+    border-color: transparent;
+    box-shadow: transparent;
+    border: 0;
+    transform: scale(0.8);
+}
+
+.btn-download:hover{
+    background-color: #1b1b20;
+}
+
+.op:hover .btn-download{
+    transform: scale(1);
+    opacity: 1;
+}
+
+.op:hover .btn-download i{
+    transform: scale(1);
+    font-size: 12px
+}

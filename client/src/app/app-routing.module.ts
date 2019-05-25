@@ -27,7 +27,7 @@ import { CoursesProfComponent } from './components/courses-prof/courses-prof.com
 import { HomeworksProfComponent } from './components/homeworks-prof/homeworks-prof.component';
 import { GradesProfComponent } from './components/grades-prof/grades-prof.component';
 import { StatsComponent } from './components/stats/stats.component';
-import { CourseDetailsComponent } from './components/course-details/course-details.component';
+import { CourseDetailsComponent } from './components/course-details-prof/course-details.component';
 import { CourseDetailsEstComponent } from './components/course-details-est/course-details-est.component';
 
 const routes: Routes = [
@@ -64,7 +64,7 @@ const routes: Routes = [
   {path: 'dashboard/1000/courses', component: CoursesEstComponent, canActivate: [UserStudentGuard]},
   {path: 'dashboard/1000/courses/:id', component: CourseDetailsEstComponent, canActivate: [UserStudentGuard]},
   {path: 'dashboard/1000/homeworks', component: HomeworksEstComponent, canActivate: [UserStudentGuard]},
-  {path: 'dashboard/1000/ratings', component: GradesEstComponent, canActivate: [UserStudentGuard]},
+  {path: 'dashboard/1000/ratings/:id', component: GradesEstComponent, canActivate: [UserStudentGuard]},
   //NOTFOUND
   {path: '**', redirectTo: 'not-found'},
   {path: 'not-found', component: NotFoundComponent}

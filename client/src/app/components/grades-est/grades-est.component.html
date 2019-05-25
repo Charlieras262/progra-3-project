@@ -1,3 +1,29 @@
-<p>
-  grades-est works!
-</p>
+<div class="container-100">
+  <div class="wrap-100">
+    <p class="title">
+      <span class="text-info">{{'course_detail.grades' | translate}}</span>
+    </p>
+    <div>
+      <div class="table-container mt-4">
+        <table class="table-rwd">
+          <thead>
+            <th scope="col" class="tb-title table-primary">Curso</th>
+            <th scope="col" class="tb-title table-primary">Parcial 1</th>
+            <th scope="col" class="tb-title table-primary">Parcial 2</th>
+            <th scope="col" class="tb-title table-primary">Actividades</th>
+            <th scope="col" class="tb-title table-primary">Examen Final</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let course of studentService.courses">
+              <td>{{course.name}}</td>
+              <td>{{course.score.p1}}</td>
+              <td>{{course.score.p1}}</td>
+              <td>{{course.score.z}}</td>
+              <td>{{course.score.fe}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
