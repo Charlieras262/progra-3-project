@@ -73,4 +73,12 @@ validation.generateStudentCode = async (inst) => {
     return `${inst}-${date.getFullYear().toString().substr(2, 2)}-${code}`;
 }
 
+validation.isFilled = (data, nameFiel) => {
+    if (data == undefined || data == ' ' || data == '') {
+        return { success: false, msg: 'The field "' + nameFiel + '" is empty' };
+    } else {
+        return { success: true, msg: 'The field is filled' };
+    }
+}
+
 module.exports = validation;

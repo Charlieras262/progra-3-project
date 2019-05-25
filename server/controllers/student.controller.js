@@ -3,7 +3,7 @@ const User = require('../models/User');
 const Validations = require('../controllers/validations/general.validation');
 const studentCTRL = {};
 
-studentCTRL.getStudents = async(req, res) => {
+studentCTRL.getStudents = async (req, res) => {
     await Student.find().populate('course_asigned').exec((err, course) => {
         if (err) throw err;
         if (!course) {
@@ -14,11 +14,11 @@ studentCTRL.getStudents = async(req, res) => {
     });
 }
 
-studentCTRL.getStudentsAmount = async(req, res) => {
+studentCTRL.getStudentsAmount = async (req, res) => {
     res.json(await Student.find().countDocuments());
 }
 
-studentCTRL.getStudent = async(req, res) => {
+studentCTRL.getStudent = async (req, res) => {
     Student.findById(req.params.id).populate({
         path: 'course_asigned',
         populate: {
@@ -34,7 +34,7 @@ studentCTRL.getStudent = async(req, res) => {
     });
 }
 
-studentCTRL.createStudent = async(req, res) => {
+studentCTRL.createStudent = async (req, res) => {
     const student = new Student({
         _id: req.body._id,
         name: req.body.name,
@@ -49,7 +49,10 @@ studentCTRL.createStudent = async(req, res) => {
     if (await Student.findById(student._id).countDocuments() == 0) {
         student.val_code = await Validations.generateVerifyCode('E');
         student._id = await Validations.generateStudentCode(req.body.inst_code);
-        await student.save().then(student => {
+        await student.save().then(async student => {
+            const bf = await Institution.find().countDocuments()
+            const history = new History({ from: 'dashboard_su.stu', bf, current: bf + 1, date: Date(), description: '' });
+            await history.save()
             res.json('student.created');
         }).catch(err => {
             throw err;
@@ -62,7 +65,7 @@ studentCTRL.createStudent = async(req, res) => {
     }
 }
 
-studentCTRL.editStudent = async(req, res) => {
+studentCTRL.editStudent = async (req, res) => {
     await Student.findByIdAndUpdate(req.params.id, req.body);
     res.json({
         msg: 'stuUpdated',
@@ -70,10 +73,13 @@ studentCTRL.editStudent = async(req, res) => {
     });
 }
 
-studentCTRL.deleteStudent = async(req, res) => {
+studentCTRL.deleteStudent = async (req, res) => {
     const student = await Student.findById(req.params.id);
     await User.findOneAndRemove({ val_code: student.val_code });
     await Student.findByIdAndRemove(req.params.id);
+    const bf = await Institution.find().countDocuments()
+    const history = new History({ from: 'dashboard_su.stu', bf, current: bf - 1, date: Date(), description: '' });
+    await history.save()
     res.json({
         msg: 'stuDeleted',
         success: true

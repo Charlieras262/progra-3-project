@@ -1,5 +1,6 @@
 const Teacher = require('../models/Teacher');
 const Validation = require('../controllers/validations/general.validation');
+const History = require('../models/History');
 const TeacherController = {};
 
 TeacherController.getTeachersAmount = async (req, res) => {
@@ -28,8 +29,11 @@ TeacherController.createTeacher = async (req, res) => {
   const teacher = new Teacher(req.body);
   teacher._id = await Validation.generateTeacherCode();
   teacher.valCode = await Validation.generateVerifyCode('P')
-  teacher.save(error => {
-    if(!error){
+  teacher.save(async error => {
+    if (!error) {
+      const bf = await Institution.find().countDocuments()
+      const history = new History({ from: 'dashboard_su.prof', bf, current: bf + 1, date: Date(), description: '' });
+      await history.save()
       res.json({
         success: true,
         msg: 'profCreated'
@@ -54,6 +58,9 @@ TeacherController.updateTeacher = async (req, res) => {
 
 TeacherController.deleteTeacher = async (req, res) => {
   await Teacher.findByIdAndDelete(req.params.id);
+  const bf = await Institution.find().countDocuments()
+      const history = new History({ from: 'dashboard_su.prof', bf, current: bf - 1, date: Date(), description: '' });
+      await history.save()
   res.json({
     msg: 'profDeleted'
   });
